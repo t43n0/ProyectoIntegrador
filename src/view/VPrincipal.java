@@ -8,18 +8,23 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 
 import javax.swing.JButton;
+import javax.swing.JMenuBar;
+import javax.swing.JPanel;
+import javax.swing.JMenu;
 
 public class VPrincipal extends JFrame {
+	public static final String ACTUALIZAR_DATOS_DEL_USUARIO = "Actualizar Datos del Usuario";
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	public static final String REGISTRAR = "Registrar";
+	public static final String RESERVAR_PISTAS = "Reservar Pistas";
 	private static final int ANCHO = 800;
 	private static final int ALTO = 500;
 	public static final String VOLVER = "Volver";
-	private JScrollPane scrpContenedor;
 	private JButton btnVolver;
+	private JButton btnReservarPista;
+	private JButton btnActualizarDatos;
 	
 	public VPrincipal() {
 		super();
@@ -33,13 +38,17 @@ public class VPrincipal extends JFrame {
 		
 		setSize(ANCHO, ALTO);
 		
-		scrpContenedor = new JScrollPane();
-		scrpContenedor.setBounds(222, 14, 2, 2);
-		getContentPane().add(scrpContenedor);
-		
 		btnVolver = new JButton(VOLVER);
 		btnVolver.setBounds(328, 387, 111, 21);
 		getContentPane().add(btnVolver);
+		
+		btnReservarPista = new JButton(RESERVAR_PISTAS);
+		btnReservarPista.setBounds(53, 52, 233, 81);
+		getContentPane().add(btnReservarPista);
+		
+		btnActualizarDatos = new JButton(ACTUALIZAR_DATOS_DEL_USUARIO);
+		btnActualizarDatos.setBounds(500, 64, 212, 68);
+		getContentPane().add(btnActualizarDatos);
 		
 		centrarVentana();
 	}
@@ -66,5 +75,8 @@ public class VPrincipal extends JFrame {
 	
 	public void setActionListener(PIListener l) {
 		btnVolver.addActionListener(l);
+		btnReservarPista.addActionListener(l);
+		btnActualizarDatos.addActionListener(l);
 	}
+
 }

@@ -2,6 +2,8 @@ package main;
 
 import java.awt.EventQueue;
 import control.PIListener;
+import view.PReservarPista;
+import view.VActualizarDatosUsuario;
 import view.VLogin;
 import view.VPrincipal;
 import view.VRegistrar;
@@ -15,8 +17,10 @@ public class principal {
 				VLogin vL = new VLogin();
 				VRegistrar vR = new VRegistrar();
 				VPrincipal vP = new VPrincipal();
+				PReservarPista pR = new PReservarPista();
+				VActualizarDatosUsuario vA = new VActualizarDatosUsuario();
 				
-				PIListener l = new PIListener(vL, vR, vP);
+				PIListener l = new PIListener(vL, vR, vP, pR, vA);
 				
 				vP.setActionListener(l);
 				vR.setActionListener(l);

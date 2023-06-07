@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Toolkit;
+import javax.swing.JPasswordField;
 
 public class VLogin extends JFrame {
 	/**
@@ -23,12 +24,11 @@ public class VLogin extends JFrame {
 	private static final int ANCHO = 400;
 	private static final int ALTO = 200;
 	public static final String INISESION = "Iniciar sesión";
-	private JScrollPane scrpContenedor;
 	private JTextField campoUsuario;
-	private JTextField campoClave;
 	private JButton btnInicioSesion;
 	private JButton btnRegistrar;
 	private final JLabel lblUsuario = new JLabel("Usuario");
+	private JPasswordField campoClave;
 	
 	public VLogin() {
 		super();
@@ -47,18 +47,9 @@ public class VLogin extends JFrame {
 		getContentPane().add(campoUsuario);
 		campoUsuario.setColumns(10);
 		
-		scrpContenedor = new JScrollPane();
-		scrpContenedor.setBounds(222, 14, 2, 2);
-		getContentPane().add(scrpContenedor);
-		
 		btnRegistrar = new JButton(REGISTRARSE);
 		btnRegistrar.setBounds(248, 102, 111, 21);
 		getContentPane().add(btnRegistrar);
-		
-		campoClave = new JTextField();
-		campoClave.setColumns(10);
-		campoClave.setBounds(27, 103, 143, 20);
-		getContentPane().add(campoClave);
 		
 		btnInicioSesion = new JButton(INISESION);
 		btnInicioSesion.setBounds(248, 38, 111, 21);
@@ -71,6 +62,11 @@ public class VLogin extends JFrame {
 		lblClave.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblClave.setBounds(27, 67, 126, 36);
 		getContentPane().add(lblClave);
+		
+		campoClave = new JPasswordField();
+		campoClave.setEchoChar('*');
+		campoClave.setBounds(27, 103, 143, 19);
+		getContentPane().add(campoClave);
 		
 		centrarVentana();
 	}
@@ -89,6 +85,13 @@ public class VLogin extends JFrame {
 	public boolean comprobarUsuario() {
 		return false;
 		
+	}
+	
+	public String getUsuarioActual() {
+		
+		String usuario = campoUsuario.getText();
+		
+		return usuario; 
 	}
 	
 	public UserClave getUserClave() {

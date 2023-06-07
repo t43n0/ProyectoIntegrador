@@ -93,5 +93,57 @@ public class PIPersistencia {
 		}
 		return ucs;
 	}
+	
+	public ArrayList<UserData> getDatosUsuario(String usuario){
+		
+		AccesoDB acceso = new AccesoDB();
+
+		
+		//SELECT NOMBRE, APELLIDOS, DNI, CIUDAD FROM DatosUsuario WHERE Nombre = usuario;
+		
+		String query = "SELECT Nombre, Apellidos, Dni, Ciudad FROM DatosUsuario WHERE Nombre = " + "'" + usuario + "'";
+		
+		Connection con = null;
+		Statement stmt = null;
+		ResultSet rslt = null;
+		
+		ArrayList<UserData> datosUsuario = new ArrayList<>();
+		
+		try {
+			
+			con = acceso.getConexion();
+
+			stmt = con.createStatement();
+
+			rslt = stmt.executeQuery(query);
+			
+			if(rslt.next()) {
+				datosUsuario.add(new UserData(rslt.getString("Nombre"), rslt.getString("Apellidos"), rslt.getString("Dni"), rslt.getString("Ciudad")));
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			
+			try {
+				
+				if (rslt != null) {
+					rslt.close();
+				}
+				if (stmt != null) {
+					stmt.close();
+				}
+				if (con != null) {
+					con.close();
+				}			
+				
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		
+		return datosUsuario;
+		
+	}
 
 }
