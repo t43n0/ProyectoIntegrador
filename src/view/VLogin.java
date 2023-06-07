@@ -9,6 +9,7 @@ import model.UserClave;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 import java.awt.Dimension;
 import java.awt.Font;
@@ -101,5 +102,10 @@ public class VLogin extends JFrame {
 	public void setActionListener(PIListener l) {
 		btnInicioSesion.addActionListener(l);
 		btnRegistrar.addActionListener(l);
+	}
+	
+	public void mostrarError(String mensaje) {
+
+		JOptionPane.showMessageDialog(this, mensaje, "Error", JOptionPane.ERROR_MESSAGE);
 	}
 }

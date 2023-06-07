@@ -40,6 +40,8 @@ public class PIListener implements ActionListener{
 				UserClave user = vL.getUserClave();
 				if(pip.login(user)) {
 					vL.cambiarVentana(vL, vP);
+				}else {
+					vL.mostrarError("No se ha encontrado este usuario");
 				}
 			}else if(e.getActionCommand().equals(VRegistrar.REGISTRAR)) {
 				UserClave user = vR.getUserClave();

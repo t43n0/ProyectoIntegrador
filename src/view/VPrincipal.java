@@ -9,6 +9,7 @@ import java.awt.Toolkit;
 
 import javax.swing.JButton;
 import javax.swing.JMenuBar;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JMenu;
 
@@ -78,5 +79,7 @@ public class VPrincipal extends JFrame {
 		btnReservarPista.addActionListener(l);
 		btnActualizarDatos.addActionListener(l);
 	}
+
+
 
 }
