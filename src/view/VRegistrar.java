@@ -133,10 +133,10 @@ public class VRegistrar extends JFrame {
 		return null;
 	}
 	
-	//public UserData getUserData() {
-		//TODO return new UserData(campoNombre.getText(), campoApellidos.getText(), 
-				//campoDni.getText(), campoCiudad.getText());
-	//}
+	public UserData getUserData() {
+		return new UserData(campoNombre.getText(), campoApellidos.getText(), 
+				campoDni.getText(), campoCiudad.getText());
+	}
 	
 	
 	public boolean comprobarUsuario() {
