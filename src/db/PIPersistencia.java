@@ -52,7 +52,9 @@ public class PIPersistencia {
 		AccesoDB adb = new AccesoDB();
 		ArrayList<UserData> ucs = new ArrayList<UserData>();
 
+
 		String sql = "SELECT * FROM Usuario";
+
 		Connection conn;
 		Statement stmt;
 		ResultSet rs = null;
@@ -62,6 +64,7 @@ public class PIPersistencia {
 			rs = stmt.executeQuery(sql);
 
 			while (rs.next()) {
+
 				String dni = rs.getString("Dni");
 				String nombre = rs.getString("Nombre");
 				String apellido = rs.getString("Apellido");

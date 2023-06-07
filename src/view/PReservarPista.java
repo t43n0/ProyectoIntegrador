@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.DefaultComboBoxModel;
 
 public class PReservarPista extends JFrame{
+	
 	private static final long serialVersionUID = 1L;
 	private JComboBox<String> cmbDeporte;
 	private JComboBox<String> cmbPista;

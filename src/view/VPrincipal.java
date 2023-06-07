@@ -8,6 +8,7 @@ import java.awt.Toolkit;
 
 import javax.swing.JButton;
 
+
 public class VPrincipal extends JFrame {
 	public static final String CONSULTA_DE_RESERVAS = "Consulta de Reservas";
 	public static final String ACTUALIZAR_DATOS_DEL_USUARIO = "Actualizar Datos del Usuario";

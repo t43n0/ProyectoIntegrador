@@ -6,7 +6,6 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 
 import db.PIPersistencia;
-import model.UserClave;
 import model.UserData;
 import view.PReservarPista;
 import view.VActualizarDatosUsuario;
@@ -42,7 +41,9 @@ public class PIListener implements ActionListener{
 			if(e.getActionCommand().equals(VLogin.REGISTRARSE)) {
 				vL.cambiarVentana(vL, vR);
 			}else if(e.getActionCommand().equals(VLogin.INISESION)) {
+
 				UserData user = vL.getUserData();
+
 				DNI = vL.getDniActual();
 				if(pip.login(user)) {
 					vL.cambiarVentana(vL, vP);

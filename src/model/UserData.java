@@ -30,6 +30,7 @@ public class UserData {
 
 	public String getNombre() {
 		return nombre;
+
 	}
 
 
