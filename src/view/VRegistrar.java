@@ -27,10 +27,12 @@ public class VRegistrar extends JFrame {
 	private JTextField campoApellidos;
 	private JButton btnCancelar;
 	private JButton btnRegistrar;
-	private JTextField campoClave;
-	private JTextField campoConfirmarClave;
+	private JTextField campoContrasenia;
+	private JTextField campoConfirmarContrasenia;
 	private JTextField campoDni;
 	private JTextField campoCiudad;
+	private JTextField campoEmail;
+	private JTextField campoTelefono;
 	
 	public VRegistrar() {
 		super();
@@ -50,7 +52,7 @@ public class VRegistrar extends JFrame {
 		campoNombre.setColumns(10);
 		
 		btnRegistrar = new JButton(REGISTRAR);
-		btnRegistrar.setBounds(453, 203, 85, 21);
+		btnRegistrar.setBounds(474, 203, 126, 62);
 		getContentPane().add(btnRegistrar);
 		
 		campoApellidos = new JTextField();
@@ -59,25 +61,25 @@ public class VRegistrar extends JFrame {
 		getContentPane().add(campoApellidos);
 		
 		btnCancelar = new JButton(CANCELAR);
-		btnCancelar.setBounds(440, 258, 111, 21);
+		btnCancelar.setBounds(457, 297, 143, 44);
 		getContentPane().add(btnCancelar);
 		
-		campoClave = new JTextField();
-		campoClave.setColumns(10);
-		campoClave.setBounds(136, 203, 143, 20);
-		getContentPane().add(campoClave);
+		campoContrasenia = new JTextField();
+		campoContrasenia.setColumns(10);
+		campoContrasenia.setBounds(136, 203, 143, 20);
+		getContentPane().add(campoContrasenia);
 		
-		campoConfirmarClave = new JTextField();
-		campoConfirmarClave.setColumns(10);
-		campoConfirmarClave.setBounds(189, 245, 143, 20);
-		getContentPane().add(campoConfirmarClave);
+		campoConfirmarContrasenia = new JTextField();
+		campoConfirmarContrasenia.setColumns(10);
+		campoConfirmarContrasenia.setBounds(198, 291, 143, 20);
+		getContentPane().add(campoConfirmarContrasenia);
 		
 		JLabel lblUsuario = new JLabel("Nombre");
 		lblUsuario.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblUsuario.setBounds(24, 59, 85, 17);
 		getContentPane().add(lblUsuario);
 		
-		JLabel lblApellidos = new JLabel("Apellidos");
+		JLabel lblApellidos = new JLabel("Apellido");
 		lblApellidos.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblApellidos.setBounds(24, 110, 102, 30);
 		getContentPane().add(lblApellidos);
@@ -89,7 +91,7 @@ public class VRegistrar extends JFrame {
 		
 		JLabel lblConfirmarClave = new JLabel("Confirmar contrase\u00F1a");
 		lblConfirmarClave.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblConfirmarClave.setBounds(24, 234, 155, 37);
+		lblConfirmarClave.setBounds(22, 280, 155, 37);
 		getContentPane().add(lblConfirmarClave);
 		
 		JLabel lblDni = new JLabel("DNI");
@@ -97,10 +99,10 @@ public class VRegistrar extends JFrame {
 		lblDni.setBounds(311, 59, 85, 17);
 		getContentPane().add(lblDni);
 		
-		JLabel lblCiudad = new JLabel("Ciudad");
-		lblCiudad.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblCiudad.setBounds(311, 110, 85, 17);
-		getContentPane().add(lblCiudad);
+		JLabel lblDireccion = new JLabel("Direcci\u00F3n");
+		lblDireccion.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblDireccion.setBounds(311, 110, 85, 17);
+		getContentPane().add(lblDireccion);
 		
 		campoDni = new JTextField();
 		campoDni.setColumns(10);
@@ -111,6 +113,26 @@ public class VRegistrar extends JFrame {
 		campoCiudad.setColumns(10);
 		campoCiudad.setBounds(424, 107, 143, 20);
 		getContentPane().add(campoCiudad);
+		
+		JLabel lblEmail = new JLabel("Email");
+		lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblEmail.setBounds(24, 155, 85, 17);
+		getContentPane().add(lblEmail);
+		
+		campoEmail = new JTextField();
+		campoEmail.setColumns(10);
+		campoEmail.setBounds(136, 156, 143, 20);
+		getContentPane().add(campoEmail);
+		
+		JLabel lblTelfono = new JLabel("Tel\u00E9fono");
+		lblTelfono.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblTelfono.setBounds(311, 159, 85, 17);
+		getContentPane().add(lblTelfono);
+		
+		campoTelefono = new JTextField();
+		campoTelefono.setColumns(10);
+		campoTelefono.setBounds(424, 156, 143, 20);
+		getContentPane().add(campoTelefono);
 		
 		centrarVentana();
 	}
@@ -125,10 +147,10 @@ public class VRegistrar extends JFrame {
 		v1.dispose();
 		v2.setVisible(true);
 	}
-	
-	public UserClave getUserClave() {
+	//TODO arreglarlo
+	public UserData getDni() {
 		if(!campoNombre.getText().isBlank()) {
-			return new UserClave(campoNombre.getText(), campoClave.getText());
+			return new UserClave(campoNombre.getText(), campoContrasenia.getText());
 		}
 		return null;
 	}
@@ -137,6 +159,9 @@ public class VRegistrar extends JFrame {
 		return new UserData(campoNombre.getText(), campoApellidos.getText(), 
 				campoDni.getText(), campoCiudad.getText());
 	}
+	
+	
+	
 	
 	
 	public boolean comprobarUsuario() {
