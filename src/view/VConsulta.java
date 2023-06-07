@@ -11,6 +11,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.ListSelectionModel;
 
 public class VConsulta extends JFrame {
 	public static final String ACTUALIZAR_DATOS_DEL_USUARIO = "Actualizar Datos del Usuario";
@@ -22,6 +24,7 @@ public class VConsulta extends JFrame {
 	private static final int ANCHO = 800;
 	private static final int ALTO = 500;
 	public static final String VOLVER_ATRAS = "Volver Atras";
+	private DefaultTableModel modeloTabla;
 	private JButton btnVolver;
 	private JTable tblTabla;
 	
@@ -51,13 +54,35 @@ public class VConsulta extends JFrame {
 		getContentPane().add(scrollPane);
 		
 		tblTabla = new JTable();
+		tblTabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPane.setViewportView(tblTabla);
 		
-		JButton btnEliminar = new JButton("Eliminar");
-		btnEliminar.setBounds(691, 416, 85, 21);
-		getContentPane().add(btnEliminar);
-		
 		centrarVentana();
+	}
+	
+	public void configurarTabla() {
+		modeloTabla = new DefaultTableModel() {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+			
+			@Override
+			public void setValueAt(Object aValue, int row, int column) {
+				
+			}
+		};
+		modeloTabla.addColumn("ID_Reserva");
+		modeloTabla.addColumn("DNI");
+		modeloTabla.addColumn("ID_Pista");
+		modeloTabla.addColumn("Dia");
+		modeloTabla.addColumn("Hora");
+		tblTabla.setModel(modeloTabla);
 	}
 	
 	private void centrarVentana() {

@@ -1,31 +1,40 @@
 package model;
 
 public class Reserva {
-	private String nombre;
-	private String pista;
-	private Puntuacion puntos;
-	private Date fecha;
+	private String id_reserva;
+	private String dni;
+	private String id_pista;
+	private String dia;
+	private String Hora;
 	
-	public Reserva(String nombre, String pista, Puntuacion puntos, Date fecha) {
-		this.nombre = nombre;
-		this.pista = pista;
-		this.puntos = puntos;
-		this.fecha = fecha;
+	public Reserva(String id_reserva, String dni, String id_pista, String dia, String hora) {
+		this.id_reserva = id_reserva;
+		this.dni = dni;
+		this.id_pista = id_pista;
+		this.dia = dia;
+		Hora = hora;
 	}
 
-	public String getNombre() {
-		return nombre;
+	public String getId_reserva() {
+		return id_reserva;
 	}
 
-	public String getPista() {
-		return pista;
+	public String getDni() {
+		return dni;
 	}
 
-	public Puntuacion getPuntos() {
-		return puntos;
+	public String getId_pista() {
+		return id_pista;
 	}
 
-	public Date getFecha() {
-		return fecha;
+	public String getDia() {
+		return dia;
 	}
+
+	public String getHora() {
+		return Hora;
+	}
+	
+	
+	
 }
