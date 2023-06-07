@@ -10,6 +10,7 @@ import model.UserClave;
 import model.UserData;
 import view.PReservarPista;
 import view.VActualizarDatosUsuario;
+import view.VConsulta;
 import view.VLogin;
 import view.VPrincipal;
 import view.VRegistrar;
@@ -21,14 +22,18 @@ public class PIListener implements ActionListener{
 	private VPrincipal vP;
 	private PReservarPista pR;
 	private VActualizarDatosUsuario vA;
+	private VConsulta vC;
 	private PIPersistencia pip = new PIPersistencia();
+	
+	public static String DNI;
 
-	public PIListener(VLogin vL, VRegistrar vR, VPrincipal vP, PReservarPista pR, VActualizarDatosUsuario vA) {
+	public PIListener(VLogin vL, VRegistrar vR, VPrincipal vP, PReservarPista pR, VActualizarDatosUsuario vA, VConsulta vC) {
 		this.vL = vL;
 		this.vR = vR;
 		this.vP = vP;
 		this.pR = pR;
 		this.vA = vA;
+		this.vC = vC;
 	}
 
 	@Override
@@ -38,6 +43,7 @@ public class PIListener implements ActionListener{
 				vL.cambiarVentana(vL, vR);
 			}else if(e.getActionCommand().equals(VLogin.INISESION)) {
 				UserClave user = vL.getUserClave();
+				DNI = vL.getDniActual();
 				if(pip.login(user)) {
 					vL.cambiarVentana(vL, vP);
 				}else {
@@ -53,11 +59,17 @@ public class PIListener implements ActionListener{
 			}else if(e.getActionCommand().equals(VPrincipal.VOLVER)) {
 				vP.cambiarVentana(vP, vL);
 			}else if(e.getActionCommand().equals(VPrincipal.RESERVAR_PISTAS)){
-				//TODO vP.cambiarVentana(vP, pR);
+				vP.cambiarVentana(vP, pR);
 			}else if(e.getActionCommand().equals(VPrincipal.ACTUALIZAR_DATOS_DEL_USUARIO)) {
 				vP.cambiarVentana(vP, vA);
 				vA.mostrarDatosusuario();
 
+			}else if(e.getActionCommand().equals(VActualizarDatosUsuario.ATRAS)) {
+				vP.cambiarVentana(vA, vP);
+			}else if(e.getActionCommand().equals(VPrincipal.CONSULTA_DE_RESERVAS)) {
+				vP.cambiarVentana(vP, vC);
+			}else if(e.getActionCommand().equals(VConsulta.VOLVER_ATRAS)) {
+				vP.cambiarVentana(vC, vP);
 			}
 		}
 		

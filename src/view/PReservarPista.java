@@ -3,9 +3,10 @@ package view;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
+import javax.swing.JFrame;
 import javax.swing.DefaultComboBoxModel;
 
-public class PReservarPista extends JPanel{
+public class PReservarPista extends JFrame{
 	private JComboBox cmbDeporte;
 	private JComboBox cmbPista;
 

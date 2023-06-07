@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+import control.PIListener;
 import db.PIPersistencia;
 import model.UserData;
 
@@ -20,7 +21,7 @@ public class VActualizarDatosUsuario extends JFrame{
 	public static final String ACTUALIZAR = "Actualizar";
 	private static final int ANCHO = 700;
 	private static final int ALTO = 400;
-	public static final String CANCELAR = "Cancelar";
+	public static final String ATRAS = "Atras";
 	private JTextField campoNombre;
 	private JTextField campoApellidos;
 	private JButton btnCancelar;
@@ -30,12 +31,10 @@ public class VActualizarDatosUsuario extends JFrame{
 	private JTextField campoDni;
 	private JTextField campoCiudad;
 	
-	private VLogin vLogin;
 	private PIPersistencia piPersistencia;
 	
 	public VActualizarDatosUsuario() {
 		super();
-		vLogin = new VLogin();
 		piPersistencia = new PIPersistencia();
 		inicio();
 	}
@@ -61,7 +60,7 @@ public class VActualizarDatosUsuario extends JFrame{
 		campoApellidos.setBounds(136, 129, 143, 20);
 		getContentPane().add(campoApellidos);
 		
-		btnCancelar = new JButton(CANCELAR);
+		btnCancelar = new JButton(ATRAS);
 		btnCancelar.setBounds(424, 294, 127, 30);
 		getContentPane().add(btnCancelar);
 		
@@ -136,17 +135,23 @@ public class VActualizarDatosUsuario extends JFrame{
 	}*/
 	
 	public void mostrarDatosusuario() {
-		String usuario = vLogin.getUsuarioActual();
-		
-		ArrayList<UserData> datosUsuario = piPersistencia.getDatosUsuario(usuario);
+		String dni = PIListener.DNI;
+		ArrayList<UserData> datosUsuario = piPersistencia.getDatosUsuario(dni);
 		
 		for (UserData userData : datosUsuario) {
-			campoDni.setText(usuario);
+			campoDni.setText(dni);
 			campoNombre.setText(userData.getNombre());
 			campoApellidos.setText(userData.getApellidos());
 			campoCiudad.setText(userData.getCiudad());
 			
 		}
+	}
+
+	public void setActionListener(PIListener l) {
+
+		btnCancelar.addActionListener(l);
+		btnActualizar.addActionListener(l);
+		
 	}
 	
 	

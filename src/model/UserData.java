@@ -5,13 +5,15 @@ public class UserData {
 	private String apellidos;
 	private String dni;
 	private String ciudad;
+	private String clave;
 	
 	
-	public UserData(String nombre, String apellidos, String dni, String ciudad) {
+	public UserData(String nombre, String apellidos, String dni, String ciudad, String clave) {
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 		this.dni = dni;
 		this.ciudad = ciudad;
+		this.clave = clave;
 	}
 	
 	public String getNombre() {
@@ -28,5 +30,9 @@ public class UserData {
 	
 	public String getCiudad() {
 		return ciudad;
+	}
+	
+	public String getClave() {
+		return clave;
 	}
 }

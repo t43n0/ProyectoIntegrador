@@ -8,13 +8,11 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 
 import javax.swing.JButton;
-import javax.swing.JMenuBar;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JMenu;
+import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.JTable;
 
-public class VPrincipal extends JFrame {
-	public static final String CONSULTA_DE_RESERVAS = "Consulta de Reservas";
+public class VConsulta extends JFrame {
 	public static final String ACTUALIZAR_DATOS_DEL_USUARIO = "Actualizar Datos del Usuario";
 	/**
 	 * 
@@ -23,13 +21,11 @@ public class VPrincipal extends JFrame {
 	public static final String RESERVAR_PISTAS = "Reservar Pistas";
 	private static final int ANCHO = 800;
 	private static final int ALTO = 500;
-	public static final String VOLVER = "Volver";
+	public static final String VOLVER_ATRAS = "Volver Atras";
 	private JButton btnVolver;
-	private JButton btnReservarPista;
-	private JButton btnActualizarDatos;
-	private JButton btnConsulta;
+	private JTable tblTabla;
 	
-	public VPrincipal() {
+	public VConsulta() {
 		super();
 		inicio();
 	}
@@ -41,21 +37,25 @@ public class VPrincipal extends JFrame {
 		
 		setSize(ANCHO, ALTO);
 		
-		btnVolver = new JButton(VOLVER);
-		btnVolver.setBounds(328, 387, 111, 21);
+		btnVolver = new JButton(VOLVER_ATRAS);
+		btnVolver.setBounds(329, 432, 111, 21);
 		getContentPane().add(btnVolver);
 		
-		btnReservarPista = new JButton(RESERVAR_PISTAS);
-		btnReservarPista.setBounds(53, 52, 233, 81);
-		getContentPane().add(btnReservarPista);
+		JLabel lblNewLabel = new JLabel("Consultar Reservas");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		lblNewLabel.setBounds(10, 10, 231, 27);
+		getContentPane().add(lblNewLabel);
 		
-		btnActualizarDatos = new JButton(ACTUALIZAR_DATOS_DEL_USUARIO);
-		btnActualizarDatos.setBounds(500, 64, 212, 68);
-		getContentPane().add(btnActualizarDatos);
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(61, 47, 656, 359);
+		getContentPane().add(scrollPane);
 		
-		btnConsulta = new JButton(CONSULTA_DE_RESERVAS);
-		btnConsulta.setBounds(268, 239, 233, 81);
-		getContentPane().add(btnConsulta);
+		tblTabla = new JTable();
+		scrollPane.setViewportView(tblTabla);
+		
+		JButton btnEliminar = new JButton("Eliminar");
+		btnEliminar.setBounds(691, 416, 85, 21);
+		getContentPane().add(btnEliminar);
 		
 		centrarVentana();
 	}
@@ -71,20 +71,11 @@ public class VPrincipal extends JFrame {
 		v2.setVisible(true);
 	}
 	
-	public boolean comprobarUsuario() {
-		return false;
-		
-	}
-	
 	public void registrarse() {
 		
 	}
 	
 	public void setActionListener(PIListener l) {
 		btnVolver.addActionListener(l);
-		btnReservarPista.addActionListener(l);
-		btnActualizarDatos.addActionListener(l);
-		btnConsulta.addActionListener(l);
-		
 	}
 }

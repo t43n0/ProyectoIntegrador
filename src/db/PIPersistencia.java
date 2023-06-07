@@ -68,7 +68,7 @@ public class PIPersistencia {
 		AccesoDB adb = new AccesoDB();
 		ArrayList<UserClave> ucs = new ArrayList<UserClave>();
 
-		String sql = "SELECT * FROM InicioSesion";
+		String sql = "SELECT Dni, Clave FROM DatosUsuario";
 		Connection conn;
 		Statement stmt;
 		ResultSet rs = null;
@@ -78,8 +78,8 @@ public class PIPersistencia {
 			rs = stmt.executeQuery(sql);
 
 			while (rs.next()) {
-				String user = rs.getString("Usuarios");
-				String clave = rs.getString("Claves");
+				String user = rs.getString("Dni");
+				String clave = rs.getString("Clave");
 				UserClave uc = new UserClave(user, clave);
 				ucs.add(uc);
 			}
@@ -94,14 +94,14 @@ public class PIPersistencia {
 		return ucs;
 	}
 	
-	public ArrayList<UserData> getDatosUsuario(String usuario){
+	public ArrayList<UserData> getDatosUsuario(String dni){
 		
 		AccesoDB acceso = new AccesoDB();
 
 		
 		//SELECT NOMBRE, APELLIDOS, DNI, CIUDAD FROM DatosUsuario WHERE Nombre = usuario;
 		
-		String query = "SELECT Nombre, Apellidos, Dni, Ciudad FROM DatosUsuario WHERE Nombre = " + "'" + usuario + "'";
+		String query = "SELECT Nombre, Apellidos, Dni, Ciudad, Clave FROM DatosUsuario WHERE Dni = " + "'" + dni + "'";
 		
 		Connection con = null;
 		Statement stmt = null;
@@ -118,7 +118,7 @@ public class PIPersistencia {
 			rslt = stmt.executeQuery(query);
 			
 			if(rslt.next()) {
-				datosUsuario.add(new UserData(rslt.getString("Nombre"), rslt.getString("Apellidos"), rslt.getString("Dni"), rslt.getString("Ciudad")));
+				datosUsuario.add(new UserData(rslt.getString("Nombre"), rslt.getString("Apellidos"), rslt.getString("Dni"), rslt.getString("Ciudad"), rslt.getString("Clave")));
 			}
 			
 		} catch (Exception e) {
