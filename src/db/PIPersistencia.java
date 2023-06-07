@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import model.UserClave;
 import model.UserData;
 
 public class PIPersistencia {
@@ -32,34 +31,19 @@ public class PIPersistencia {
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
-		String sql = "INSERT INTO DatosUsuario (Nombre, Apellidos, DNI, Ciudad) VALUES (?,?,?,?)";
+		String sql = "INSERT INTO Usuario (Dni, Nombre, Apellido, Email, Contrasenia, " + 
+		"Telefono, Direccion) VALUES (?,?,?,?,?,?,?)";
 		try (PreparedStatement statement = connection.prepareStatement(sql)) {
-			statement.setString(1, ud.getNombre());
-			statement.setString(2, ud.getApellido());
-			statement.setString(3, ud.getDni());
-			statement.setString(4, ud.getDireccion());
+			statement.setString(1, ud.getDni());
+			statement.setString(2, ud.getNombre());
+			statement.setString(3, ud.getApellido());
+			statement.setString(4, ud.getEmail());
+			statement.setString(5, ud.getContrasenia());
+			statement.setString(6, ud.getTelefono());
+			statement.setString(7, ud.getDireccion());
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
-	}
-
-	public void registrarUserClave(UserClave uc) {
-		Connection connection = null;
-		AccesoDB con = new AccesoDB();
-		try {
-			connection = con.getConexion();
-		} catch (ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
-		}
-		String sql = "INSERT INTO InicioSesion (Usuarios, Claves) VALUES (?,?)";
-		try (PreparedStatement statement = connection.prepareStatement(sql)) {
-			statement.setString(1, uc.getUser());
-			statement.setString(2, uc.getClave());
-			statement.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-
 		}
 	}
 
@@ -102,11 +86,8 @@ public class PIPersistencia {
 	public ArrayList<UserData> getDatosUsuario(String dni){
 		
 		AccesoDB acceso = new AccesoDB();
-
 		
-		//SELECT NOMBRE, APELLIDOS, DNI, CIUDAD FROM DatosUsuario WHERE Nombre = usuario;
-		
-		String query = "SELECT Nombre, Apellidos, Dni, Ciudad, Clave FROM DatosUsuario WHERE Dni = " + "'" + dni + "'";
+		String query = "SELECT * FROM Usuario WHERE Dni = " + "'" + dni + "'";
 		
 		Connection con = null;
 		Statement stmt = null;
@@ -121,10 +102,10 @@ public class PIPersistencia {
 			stmt = con.createStatement();
 
 			rslt = stmt.executeQuery(query);
-			//TODO Hay que cambiar los getStrings para que coincidan con el modelo de la base de datos
 			if(rslt.next()) {
-				datosUsuario.add(new UserData(rslt.getString("D"), rslt.getString("Apellidos"), 
-						rslt.getString("Dni"), rslt.getString("Ciudad"), rslt.getString("Clave"), query, query));
+				datosUsuario.add(new UserData(rslt.getString("Dni"), rslt.getString("Nombre"), 
+						rslt.getString("Apellido"), rslt.getString("Email"), rslt.getString("Contrasenia"),
+						rslt.getString("Telefono"), rslt.getString("Direccion")));
 			}
 			
 		} catch (Exception e) {

@@ -142,10 +142,6 @@ public class VRegistrar extends JFrame {
 				campoCiudad.getText());
 	}
 	
-	
-	
-	
-	
 	public boolean comprobarUsuario() {
 		return false;
 		
