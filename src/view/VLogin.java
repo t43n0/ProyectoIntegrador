@@ -1,14 +1,14 @@
 package view;
 
 import javax.swing.JFrame;
-import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 import control.PIListener;
-import model.UserClave;
+import model.UserData;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 import java.awt.Dimension;
 import java.awt.Font;
@@ -24,10 +24,11 @@ public class VLogin extends JFrame {
 	private static final int ANCHO = 400;
 	private static final int ALTO = 200;
 	public static final String INISESION = "Iniciar sesión";
-	private JTextField campoUsuario;
+	
+	private JTextField campoDni;
 	private JButton btnInicioSesion;
 	private JButton btnRegistrar;
-	private final JLabel lblUsuario = new JLabel("Usuario");
+	private final JLabel lblDni = new JLabel("Dni");
 	private JPasswordField campoClave;
 	
 	public VLogin() {
@@ -42,10 +43,10 @@ public class VLogin extends JFrame {
 		
 		setSize(ANCHO, ALTO);
 		
-		campoUsuario = new JTextField();
-		campoUsuario.setBounds(27, 39, 143, 20);
-		getContentPane().add(campoUsuario);
-		campoUsuario.setColumns(10);
+		campoDni = new JTextField();
+		campoDni.setBounds(27, 39, 143, 20);
+		getContentPane().add(campoDni);
+		campoDni.setColumns(10);
 		
 		btnRegistrar = new JButton(REGISTRARSE);
 		btnRegistrar.setBounds(248, 102, 111, 21);
@@ -54,9 +55,9 @@ public class VLogin extends JFrame {
 		btnInicioSesion = new JButton(INISESION);
 		btnInicioSesion.setBounds(248, 38, 111, 21);
 		getContentPane().add(btnInicioSesion);
-		lblUsuario.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblUsuario.setBounds(27, 0, 126, 36);
-		getContentPane().add(lblUsuario);
+		lblDni.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblDni.setBounds(27, 0, 126, 36);
+		getContentPane().add(lblDni);
 		
 		JLabel lblClave = new JLabel("Contrase\u00F1a");
 		lblClave.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -87,19 +88,27 @@ public class VLogin extends JFrame {
 		
 	}
 	
-	public String getUsuarioActual() {
-		
-		String usuario = campoUsuario.getText();
-		
-		return usuario; 
+	public UserData getUserData() {
+		char[] passwordChars = campoClave.getPassword();
+		String password = new String(passwordChars);
+		UserData ud = new UserData(campoDni.getText(), "", "", "", password, "", "");
+		return ud;
 	}
 	
-	public UserClave getUserClave() {
-		return new UserClave(campoUsuario.getText(), campoClave.getText());
+	public String getDniActual() {
+		
+		String dni = campoDni.getText();
+		
+		return dni; 
 	}
 	
 	public void setActionListener(PIListener l) {
 		btnInicioSesion.addActionListener(l);
 		btnRegistrar.addActionListener(l);
+	}
+	
+	public void mostrarError(String mensaje) {
+
+		JOptionPane.showMessageDialog(this, mensaje, "Error", JOptionPane.ERROR_MESSAGE);
 	}
 }

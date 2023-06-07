@@ -12,11 +12,11 @@ import model.UserData;
 
 public class PIPersistencia {
 
-	public boolean login(UserClave user) {
-		ArrayList<UserClave> arrUc = cagarDatosBD();
-		for (UserClave uc : arrUc) {
-			if (uc.getUser().equals(user.getUser())) {
-				if (uc.getClave().equals(user.getClave())) {
+	public boolean login(UserData user) {
+		ArrayList<UserData> arrUc = cargarDatosBD();
+		for (UserData uc : arrUc) {
+			if (uc.getDni().equals(user.getDni())) {
+				if (uc.getContrasenia().equals(user.getContrasenia())) {
 					return true;
 				}
 			}
@@ -35,9 +35,9 @@ public class PIPersistencia {
 		String sql = "INSERT INTO DatosUsuario (Nombre, Apellidos, DNI, Ciudad) VALUES (?,?,?,?)";
 		try (PreparedStatement statement = connection.prepareStatement(sql)) {
 			statement.setString(1, ud.getNombre());
-			statement.setString(2, ud.getApellidos());
+			statement.setString(2, ud.getApellido());
 			statement.setString(3, ud.getDni());
-			statement.setString(4, ud.getCiudad());
+			statement.setString(4, ud.getDireccion());
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -63,12 +63,12 @@ public class PIPersistencia {
 		}
 	}
 
-	public ArrayList<UserClave> cagarDatosBD() {
+	public ArrayList<UserData> cargarDatosBD() {
 
 		AccesoDB adb = new AccesoDB();
-		ArrayList<UserClave> ucs = new ArrayList<UserClave>();
+		ArrayList<UserData> ucs = new ArrayList<UserData>();
 
-		String sql = "SELECT * FROM InicioSesion";
+		String sql = "SELECT * FROM Usuario";
 		Connection conn;
 		Statement stmt;
 		ResultSet rs = null;
@@ -78,9 +78,14 @@ public class PIPersistencia {
 			rs = stmt.executeQuery(sql);
 
 			while (rs.next()) {
-				String user = rs.getString("Usuarios");
-				String clave = rs.getString("Claves");
-				UserClave uc = new UserClave(user, clave);
+				String dni = rs.getString("Dni");
+				String nombre = rs.getString("Nombre");
+				String apellido = rs.getString("Apellido");
+				String email = rs.getString("Email");
+				String contrasenia = rs.getString("Contrasenia");
+				String telefono = rs.getString("Telefono");
+				String direccion = rs.getString("Direccion");
+				UserData uc = new UserData(dni, nombre, apellido, email, contrasenia, telefono, direccion);
 				ucs.add(uc);
 			}
 
@@ -94,14 +99,14 @@ public class PIPersistencia {
 		return ucs;
 	}
 	
-	public ArrayList<UserData> getDatosUsuario(String usuario){
+	public ArrayList<UserData> getDatosUsuario(String dni){
 		
 		AccesoDB acceso = new AccesoDB();
 
 		
 		//SELECT NOMBRE, APELLIDOS, DNI, CIUDAD FROM DatosUsuario WHERE Nombre = usuario;
 		
-		String query = "SELECT Nombre, Apellidos, Dni, Ciudad FROM DatosUsuario WHERE Nombre = " + "'" + usuario + "'";
+		String query = "SELECT Nombre, Apellidos, Dni, Ciudad, Clave FROM DatosUsuario WHERE Dni = " + "'" + dni + "'";
 		
 		Connection con = null;
 		Statement stmt = null;
@@ -116,9 +121,10 @@ public class PIPersistencia {
 			stmt = con.createStatement();
 
 			rslt = stmt.executeQuery(query);
-			
+			//TODO Hay que cambiar los getStrings para que coincidan con el modelo de la base de datos
 			if(rslt.next()) {
-				datosUsuario.add(new UserData(rslt.getString("Nombre"), rslt.getString("Apellidos"), rslt.getString("Dni"), rslt.getString("Ciudad")));
+				datosUsuario.add(new UserData(rslt.getString("D"), rslt.getString("Apellidos"), 
+						rslt.getString("Dni"), rslt.getString("Ciudad"), rslt.getString("Clave"), query, query));
 			}
 			
 		} catch (Exception e) {

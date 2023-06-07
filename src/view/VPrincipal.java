@@ -1,18 +1,15 @@
 package view;
 
 import javax.swing.JFrame;
-import javax.swing.JScrollPane;
 import control.PIListener;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
 
 import javax.swing.JButton;
-import javax.swing.JMenuBar;
-import javax.swing.JPanel;
-import javax.swing.JMenu;
 
 public class VPrincipal extends JFrame {
+	public static final String CONSULTA_DE_RESERVAS = "Consulta de Reservas";
 	public static final String ACTUALIZAR_DATOS_DEL_USUARIO = "Actualizar Datos del Usuario";
 	/**
 	 * 
@@ -25,6 +22,7 @@ public class VPrincipal extends JFrame {
 	private JButton btnVolver;
 	private JButton btnReservarPista;
 	private JButton btnActualizarDatos;
+	private JButton btnConsulta;
 	
 	public VPrincipal() {
 		super();
@@ -49,6 +47,10 @@ public class VPrincipal extends JFrame {
 		btnActualizarDatos = new JButton(ACTUALIZAR_DATOS_DEL_USUARIO);
 		btnActualizarDatos.setBounds(500, 64, 212, 68);
 		getContentPane().add(btnActualizarDatos);
+		
+		btnConsulta = new JButton(CONSULTA_DE_RESERVAS);
+		btnConsulta.setBounds(268, 239, 233, 81);
+		getContentPane().add(btnConsulta);
 		
 		centrarVentana();
 	}
@@ -77,6 +79,7 @@ public class VPrincipal extends JFrame {
 		btnVolver.addActionListener(l);
 		btnReservarPista.addActionListener(l);
 		btnActualizarDatos.addActionListener(l);
+		btnConsulta.addActionListener(l);
+		
 	}
-
 }

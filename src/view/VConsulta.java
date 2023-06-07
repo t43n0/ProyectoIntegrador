@@ -21,9 +21,9 @@ public class VConsulta extends JFrame {
 	public static final String RESERVAR_PISTAS = "Reservar Pistas";
 	private static final int ANCHO = 800;
 	private static final int ALTO = 500;
-	public static final String VOLVER = "Volver";
+	public static final String VOLVER_ATRAS = "Volver Atras";
 	private JButton btnVolver;
-	private JTable table;
+	private JTable tblTabla;
 	
 	public VConsulta() {
 		super();
@@ -37,7 +37,7 @@ public class VConsulta extends JFrame {
 		
 		setSize(ANCHO, ALTO);
 		
-		btnVolver = new JButton(VOLVER);
+		btnVolver = new JButton(VOLVER_ATRAS);
 		btnVolver.setBounds(329, 432, 111, 21);
 		getContentPane().add(btnVolver);
 		
@@ -50,12 +50,12 @@ public class VConsulta extends JFrame {
 		scrollPane.setBounds(61, 47, 656, 359);
 		getContentPane().add(scrollPane);
 		
-		table = new JTable();
-		scrollPane.setViewportView(table);
+		tblTabla = new JTable();
+		scrollPane.setViewportView(tblTabla);
 		
-		JButton btnNewButton = new JButton("Eliminar");
-		btnNewButton.setBounds(691, 416, 85, 21);
-		getContentPane().add(btnNewButton);
+		JButton btnEliminar = new JButton("Eliminar");
+		btnEliminar.setBounds(691, 416, 85, 21);
+		getContentPane().add(btnEliminar);
 		
 		centrarVentana();
 	}

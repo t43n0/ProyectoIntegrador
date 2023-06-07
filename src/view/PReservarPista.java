@@ -1,14 +1,11 @@
 package view;
 
-import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
+import javax.swing.JFrame;
 import javax.swing.DefaultComboBoxModel;
 
-public class PReservarPista extends JPanel{
-	/**
-	 * 
-	 */
+public class PReservarPista extends JFrame{
 	private static final long serialVersionUID = 1L;
 	private JComboBox<String> cmbDeporte;
 	private JComboBox<String> cmbPista;
