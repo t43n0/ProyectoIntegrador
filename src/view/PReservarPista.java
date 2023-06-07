@@ -6,8 +6,12 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 
 public class PReservarPista extends JPanel{
-	private JComboBox cmbDeporte;
-	private JComboBox cmbPista;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private JComboBox<String> cmbDeporte;
+	private JComboBox<String> cmbPista;
 
 	
 	public PReservarPista(){
@@ -17,8 +21,8 @@ public class PReservarPista extends JPanel{
 		lblDeporte.setBounds(46, 54, 57, 23);
 		add(lblDeporte);
 		
-		cmbDeporte = new JComboBox();
-		cmbDeporte.setModel(new DefaultComboBoxModel(new String[] {"Selecciona un deporte", "Baloncesto", "F\u00FAtbol", "Tenis", "Padel"}));
+		cmbDeporte = new JComboBox<String>();
+		cmbDeporte.setModel(new DefaultComboBoxModel<String>(new String[] {"Selecciona un deporte", "Baloncesto", "F\u00FAtbol", "Tenis", "Padel"}));
 		cmbDeporte.setBounds(116, 54, 137, 23);
 		add(cmbDeporte);
 		
@@ -26,7 +30,7 @@ public class PReservarPista extends JPanel{
 		lblPista.setBounds(46, 103, 46, 14);
 		add(lblPista);
 		
-		cmbPista = new JComboBox();
+		cmbPista = new JComboBox<String>();
 		cmbPista.setBounds(116, 99, 137, 23);
 		add(cmbPista);
 		
@@ -38,11 +42,11 @@ public class PReservarPista extends JPanel{
 		lblHora.setBounds(46, 180, 46, 14);
 		add(lblHora);
 		
-		JComboBox cmbDia = new JComboBox();
+		JComboBox<String> cmbDia = new JComboBox<String>();
 		cmbDia.setBounds(116, 140, 137, 23);
 		add(cmbDia);
 		
-		JComboBox cmbHora = new JComboBox();
+		JComboBox<String> cmbHora = new JComboBox<String>();
 		cmbHora.setBounds(116, 176, 137, 23);
 		add(cmbHora);
 		init();
