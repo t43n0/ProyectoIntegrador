@@ -74,7 +74,7 @@ public class VLogin extends JFrame {
 	private void centrarVentana() {
 		Dimension pantalla = Toolkit.getDefaultToolkit().getScreenSize();               
 		Dimension ventana = new Dimension(ANCHO, ALTO);               
-		setLocation((pantalla.width - ventana.width) / 2,  (pantalla.height - ventana.height) / 2);
+		setLocation((pantalla.width - ventana.width) / 2, (pantalla.height - ventana.height) / 2);
 	}
 	
 	public void cambiarVentana(JFrame v1, JFrame v2) {
