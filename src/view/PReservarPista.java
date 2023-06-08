@@ -30,7 +30,6 @@ public class PReservarPista extends JFrame{
 	public static final String RETROCEDER = "Retroceder";
 	public static final String RESERVAR_PISTA = "Reservar Pista";
 	private JButton btnReservar;
-	private JButton btnRetroceder;
 	private static final int ANCHO = 800;
 	private static final int ALTO = 500;
 
@@ -42,6 +41,7 @@ public class PReservarPista extends JFrame{
 	private ArrayList<String> listaPistas = new ArrayList<>(Arrays.asList("Pista de Tenis", "Pista de Fútbol", "Pista de Pádel"));
 
 	private PIPersistencia piPersistencia;
+	private String id_pista;
 	
 	public PReservarPista(){
 		super("Reservas");
@@ -84,7 +84,7 @@ public class PReservarPista extends JFrame{
 		cmbHora.setBounds(516, 115, 137, 23);
 		getContentPane().add(cmbHora);
 		
-		JButton btnReservar = new JButton("Reservar Pista");
+		btnReservar = new JButton(RESERVAR_PISTA);
 		btnReservar.setFont(new Font("Bahnschrift", Font.PLAIN, 14));
 		btnReservar.setBounds(300, 253, 196, 48);
 		getContentPane().add(btnReservar);
@@ -173,7 +173,6 @@ public class PReservarPista extends JFrame{
 	}
 
 	public void setActionListener(PIListener l) {
-		btnReservar.addActionListener(l);
 		btnReservar.addActionListener(l);
 		cmbPista.addActionListener(l);
 		

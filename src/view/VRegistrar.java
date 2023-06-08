@@ -11,6 +11,8 @@ import java.awt.Toolkit;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.awt.Color;
 
@@ -141,9 +143,20 @@ public class VRegistrar extends JFrame {
 	}
 	
 	public UserData getUserData() {
-		return new UserData(campoDni.getText(), campoNombre.getText(), campoApellidos.getText(),
-				campoEmail.getText(), campoContrasenia.getText(), campoTelefono.getText(),
-				campoCiudad.getText());
+		String dni = campoDni.getText();
+	    String nombre = campoNombre.getText();
+	    String apellidos = campoApellidos.getText();
+	    String email = campoEmail.getText();
+	    String contrasenia = campoContrasenia.getText();
+	    String telefono = campoTelefono.getText();
+	    String ciudad = campoCiudad.getText();
+	    
+	    if (dni.isEmpty() || nombre.isEmpty() || apellidos.isEmpty() || email.isEmpty()
+	    		|| contrasenia.isEmpty() || telefono.isEmpty() || ciudad.isEmpty()) {
+	        return null;
+	    } else {
+	        return new UserData(dni, nombre, apellidos, email, contrasenia, telefono, ciudad);
+	    }
 	}
 	
 	public boolean comprobarUsuario() {

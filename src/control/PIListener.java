@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 
 import db.PIPersistencia;
 import model.UserData;
@@ -54,7 +55,12 @@ public class PIListener implements ActionListener{
 				}
 			}else if(e.getActionCommand().equals(VRegistrar.REGISTRAR)) {
 				UserData ud = vR.getUserData();
-				pip.registrarUserData(ud);
+				if(ud != null) {
+					pip.registrarUserData(ud);
+
+				} else {
+					JOptionPane.showMessageDialog(vR, "No puede haber campos en blanco", "Error", 0);
+				}
 			}else if(e.getActionCommand().equals(VRegistrar.CANCELAR)) {
 				vR.cambiarVentana(vR, vL);
 			}else if(e.getActionCommand().equals(VPrincipal.VOLVER)) {
