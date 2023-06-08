@@ -13,7 +13,6 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.ListSelectionModel;
 
 public class VConsulta extends JFrame {
 	public static final String ACTUALIZAR_DATOS_DEL_USUARIO = "Actualizar Datos del Usuario";
@@ -55,8 +54,11 @@ public class VConsulta extends JFrame {
 		getContentPane().add(scrollPane);
 		
 		tblTabla = new JTable();
-		tblTabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPane.setViewportView(tblTabla);
+		
+		JButton btnEliminar = new JButton("Eliminar");
+		btnEliminar.setBounds(691, 416, 85, 21);
+		getContentPane().add(btnEliminar);
 		
 		centrarVentana();
 	}
@@ -111,10 +113,6 @@ public class VConsulta extends JFrame {
 	public void cambiarVentana(JFrame v1, JFrame v2) {
 		v1.dispose();
 		v2.setVisible(true);
-	}
-	
-	public void registrarse() {
-		
 	}
 	
 	public void setActionListener(PIListener l) {

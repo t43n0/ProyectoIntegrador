@@ -1,7 +1,5 @@
 package view;
 
-import javax.swing.JPanel;
-
 import db.PIPersistencia;
 import model.Reserva;
 

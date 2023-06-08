@@ -13,6 +13,7 @@ import javax.swing.JTextField;
 import control.PIListener;
 import db.PIPersistencia;
 import model.UserData;
+import java.awt.Color;
 
 public class VActualizarDatosUsuario extends JFrame{
 
@@ -27,7 +28,6 @@ public class VActualizarDatosUsuario extends JFrame{
 	private JButton btnCancelar;
 	private JButton btnActualizar;
 	private JTextField campoClave;
-	private JTextField campoConfirmarClave;
 	private JTextField campoDni;
 	private JTextField campoCiudad;
 	
@@ -37,6 +37,7 @@ public class VActualizarDatosUsuario extends JFrame{
 	
 	public VActualizarDatosUsuario() {
 		super();
+		getContentPane().setBackground(new Color(255, 128, 192));
 		piPersistencia = new PIPersistencia();
 		inicio();
 	}
@@ -49,92 +50,84 @@ public class VActualizarDatosUsuario extends JFrame{
 		setSize(ANCHO, ALTO);
 		
 		campoNombre = new JTextField();
-		campoNombre.setBounds(424, 56, 143, 20);
+		campoNombre.setBounds(115, 115, 143, 20);
 		getContentPane().add(campoNombre);
 		campoNombre.setColumns(10);
 		
 		btnActualizar = new JButton(ACTUALIZAR);
-		btnActualizar.setBounds(424, 199, 127, 30);
+		btnActualizar.setFont(new Font("Bahnschrift", Font.PLAIN, 12));
+		btnActualizar.setBounds(424, 294, 143, 30);
 		getContentPane().add(btnActualizar);
 		
 		campoApellidos = new JTextField();
 		campoApellidos.setColumns(10);
-		campoApellidos.setBounds(136, 103, 143, 20);
+		campoApellidos.setBounds(115, 181, 143, 20);
 		getContentPane().add(campoApellidos);
 		
 		btnCancelar = new JButton(ATRAS);
-		btnCancelar.setBounds(424, 294, 127, 30);
+		btnCancelar.setFont(new Font("Bahnschrift", Font.PLAIN, 12));
+		btnCancelar.setBounds(115, 294, 143, 30);
 		getContentPane().add(btnCancelar);
 		
 		campoClave = new JTextField();
 		campoClave.setColumns(10);
-		campoClave.setBounds(189, 218, 143, 20);
+		campoClave.setBounds(424, 115, 143, 20);
 		getContentPane().add(campoClave);
 		
-		campoConfirmarClave = new JTextField();
-		campoConfirmarClave.setColumns(10);
-		campoConfirmarClave.setBounds(189, 259, 143, 20);
-		getContentPane().add(campoConfirmarClave);
-		
 		JLabel lblUsuario = new JLabel("Nombre");
-		lblUsuario.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblUsuario.setBounds(311, 55, 85, 17);
+		lblUsuario.setFont(new Font("Bahnschrift", Font.PLAIN, 16));
+		lblUsuario.setBounds(115, 98, 85, 17);
 		getContentPane().add(lblUsuario);
 		
 		JLabel lblApellidos = new JLabel("Apellidos");
-		lblApellidos.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblApellidos.setBounds(24, 95, 102, 30);
+		lblApellidos.setFont(new Font("Bahnschrift", Font.PLAIN, 16));
+		lblApellidos.setBounds(115, 145, 102, 30);
 		getContentPane().add(lblApellidos);
 		
 		JLabel lblClave = new JLabel("Contrase\u00F1a");
-		lblClave.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblClave.setBounds(24, 218, 85, 30);
+		lblClave.setFont(new Font("Bahnschrift", Font.PLAIN, 16));
+		lblClave.setBounds(424, 91, 85, 30);
 		getContentPane().add(lblClave);
 		
-		JLabel lblConfirmarClave = new JLabel("Confirmar contrase\u00F1a");
-		lblConfirmarClave.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblConfirmarClave.setBounds(24, 258, 155, 37);
-		getContentPane().add(lblConfirmarClave);
-		
 		JLabel lblDni = new JLabel("DNI");
-		lblDni.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblDni.setBounds(24, 55, 85, 17);
+		lblDni.setFont(new Font("Bahnschrift", Font.PLAIN, 16));
+		lblDni.setBounds(115, 34, 85, 17);
 		getContentPane().add(lblDni);
 		
 		JLabel lblCiudad = new JLabel("Ciudad");
-		lblCiudad.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblCiudad.setBounds(311, 102, 85, 17);
+		lblCiudad.setFont(new Font("Bahnschrift", Font.PLAIN, 16));
+		lblCiudad.setBounds(424, 34, 85, 17);
 		getContentPane().add(lblCiudad);
 		
 		campoDni = new JTextField();
 		campoDni.setColumns(10);
-		campoDni.setBounds(136, 56, 143, 20);
+		campoDni.setBounds(115, 61, 143, 20);
 		getContentPane().add(campoDni);
 		
 		campoCiudad = new JTextField();
 		campoCiudad.setColumns(10);
-		campoCiudad.setBounds(424, 103, 143, 20);
+		campoCiudad.setBounds(424, 56, 143, 20);
 		getContentPane().add(campoCiudad);
 		
-		JLabel lblNewLabel = new JLabel("Telefono");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel.setBounds(24, 161, 113, 20);
-		getContentPane().add(lblNewLabel);
-		
 		campoTelefono = new JTextField();
-		campoTelefono.setBounds(136, 161, 143, 20);
+		campoTelefono.setBounds(115, 240, 143, 20);
 		getContentPane().add(campoTelefono);
 		campoTelefono.setColumns(10);
 		
-		JLabel lblNewLabel_1 = new JLabel("Email");
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel_1.setBounds(311, 165, 45, 13);
-		getContentPane().add(lblNewLabel_1);
-		
 		campoEmail = new JTextField();
-		campoEmail.setColumns(10);
-		campoEmail.setBounds(424, 164, 143, 20);
+		campoEmail.setBounds(424, 240, 143, 20);
 		getContentPane().add(campoEmail);
+		campoEmail.setColumns(10);
+		
+		JLabel lblTelefono = new JLabel("Telefono");
+		lblTelefono.setFont(new Font("Bahnschrift", Font.PLAIN, 16));
+		lblTelefono.setBounds(115, 221, 85, 17);
+		getContentPane().add(lblTelefono);
+		
+		JLabel lblEmail = new JLabel("Email");
+		lblEmail.setFont(new Font("Bahnschrift", Font.PLAIN, 16));
+		lblEmail.setBounds(424, 222, 85, 17);
+		getContentPane().add(lblEmail);
 		
 		centrarVentana();
 		//habilitarDatos(true);
@@ -180,7 +173,6 @@ public class VActualizarDatosUsuario extends JFrame{
 	}
 
 	public UserData cargarUsuario() {
-		
 		return new UserData(campoDni.getText(), campoNombre.getText(), campoApellidos.getText(),
 				campoEmail.getText(), campoClave.getText(), campoTelefono.getText(), campoCiudad.getText());
 	}
