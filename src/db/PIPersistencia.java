@@ -137,7 +137,8 @@ public class PIPersistencia {
 		
 	}
 	
-	public ArrayList<Reserva> getReservas(int id_pista){
+
+	public ArrayList<Reserva> getReservas(String id_pista){
 		
 		AccesoDB acceso = new AccesoDB();
 		
@@ -216,4 +217,38 @@ public class PIPersistencia {
 	    }
 	}
 
+	public void realizarReserva(Reserva reservaDatos) {
+
+		AccesoDB acceso = new AccesoDB();
+		
+		String query = "INSERT INTO Reserva (Dni, ID_Pista, Dia, Hora) VALUES (" + reservaDatos.getDni() + ", " + reservaDatos.getId_pista() + ", " + reservaDatos.getDia() + ", " + reservaDatos.getHora() + ")";
+
+		Connection con = null;
+		Statement stmt = null;
+
+		try {
+			con = acceso.getConexion();
+
+			stmt = con.createStatement();
+			
+			stmt.executeUpdate(query);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+
+			try {
+
+				if (stmt != null) {
+					stmt.close();
+				}
+				if (con != null) {
+					con.close();
+				}
+
+			} catch (SQLException e2) {
+				e2.printStackTrace();
+			}
+		}
+	}
 }

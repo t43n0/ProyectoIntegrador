@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 USUARIO: (Dni, Nombre, Apellido, Email, Contraseña, Teléfono, Dirección)
 
 -Dni es clave primaria
@@ -47,4 +48,55 @@ RESERVAUSUARIO: (ID_Reserva, Dni)
 
 -ID_Reserva es clave forane (hace referencia a la tabla Reserva)
 >>>>>>> cad94b9e6445191dc056084636f89faefe73f8b5
+=======
+<<<<<<< HEAD
+USUARIO: (Dni, Nombre, Apellido, Email, Contraseña, Teléfono, Dirección)
+
+-Dni es clave primaria
+-Todos obligatorios
+
+
+PISTA: (ID_Pista, Nombre, Tipo, Disponibilidad)
+-ID_Pista
+-Todos obligatorios
+
+
+RESERVA: (ID_Reserva, Dni, ID_Pista, Fecha, HoraInicio, HoraFin)
+-ID_Reserva es clave primaria
+-Dni es clave foranea (hace referencia a la tabla Usuario mediante el atributo Dni)
+-ID_Pista es clave foranea (hace referencia a la tabla Pista)
+Fecha es not null
+HoraInicio es not null
+HoraFin es not null
+
+
+RESERVAUSUARIO: (ID_Reserva, Dni)
+
+-ID_Reserva es clave forane (hace referencia a la tabla Reserva)
+=======
+USUARIO: (Dni, Nombre, Apellido, Email, Contraseña, Teléfono, Dirección)
+
+-Dni es clave primaria
+-Todos obligatorios
+
+
+PISTA: (ID_Pista, Nombre, Tipo, Disponibilidad)
+-ID_Pista
+-Todos obligatorios
+
+
+RESERVA: (ID_Reserva, Dni, ID_Pista, Fecha, HoraInicio, HoraFin)
+-ID_Reserva es clave primaria
+-Dni es clave foranea (hace referencia a la tabla Usuario mediante el atributo Dni)
+-ID_Pista es clave foranea (hace referencia a la tabla Pista)
+Fecha es not null
+HoraInicio es not null
+HoraFin es not null
+
+
+RESERVAUSUARIO: (ID_Reserva, Dni)
+
+-ID_Reserva es clave forane (hace referencia a la tabla Reserva)
+>>>>>>> cad94b9e6445191dc056084636f89faefe73f8b5
+>>>>>>> 27c282583b21e796f70084a31909bfa33a83d664
 -Dni es clave foranea (hace referencia a la tabla Usuario mediante el atributo Dni)

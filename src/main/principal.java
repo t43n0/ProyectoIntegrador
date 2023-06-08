@@ -29,6 +29,7 @@ public class principal {
 				vL.setActionListener(l);
 				vA.setActionListener(l);
 				vC.setActionListener(l);
+				pR.setActionListener(l);
 				vL.setVisible(true);
 				
 			}

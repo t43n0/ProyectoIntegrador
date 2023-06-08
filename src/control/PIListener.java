@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 
 import db.PIPersistencia;
 import model.UserData;
@@ -76,8 +77,9 @@ public class PIListener implements ActionListener{
 				pR.reservarPista();
 			}else if(e.getActionCommand().equals(PReservarPista.RETROCEDER)){
 				vP.cambiarVentana(pR, vP);
-			}
-			
+			} 
+		} else if(e.getSource() instanceof JComboBox) {
+			pR.actualizarComboBox();
 		}
 		
 		
