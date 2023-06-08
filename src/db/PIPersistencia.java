@@ -7,16 +7,16 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import model.UserClave;
+import model.Reserva;
 import model.UserData;
 
 public class PIPersistencia {
 
-	public boolean login(UserClave user) {
-		ArrayList<UserClave> arrUc = cagarDatosBD();
-		for (UserClave uc : arrUc) {
-			if (uc.getUser().equals(user.getUser())) {
-				if (uc.getClave().equals(user.getClave())) {
+	public boolean login(UserData user) {
+		ArrayList<UserData> arrUc = cargarDatosBD();
+		for (UserData uc : arrUc) {
+			if (uc.getDni().equals(user.getDni())) {
+				if (uc.getContrasenia().equals(user.getContrasenia())) {
 					return true;
 				}
 			}
@@ -32,43 +32,30 @@ public class PIPersistencia {
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
-		String sql = "INSERT INTO DatosUsuario (Nombre, Apellidos, DNI, Ciudad) VALUES (?,?,?,?)";
+		String sql = "INSERT INTO Usuario (Dni, Nombre, Apellido, Email, Contrasenia, " + 
+		"Telefono, Direccion) VALUES (?,?,?,?,?,?,?)";
 		try (PreparedStatement statement = connection.prepareStatement(sql)) {
-			statement.setString(1, ud.getNombre());
-			statement.setString(2, ud.getApellidos());
-			statement.setString(3, ud.getDni());
-			statement.setString(4, ud.getCiudad());
+			statement.setString(1, ud.getDni());
+			statement.setString(2, ud.getNombre());
+			statement.setString(3, ud.getApellido());
+			statement.setString(4, ud.getEmail());
+			statement.setString(5, ud.getContrasenia());
+			statement.setString(6, ud.getTelefono());
+			statement.setString(7, ud.getDireccion());
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 
-	public void registrarUserClave(UserClave uc) {
-		Connection connection = null;
-		AccesoDB con = new AccesoDB();
-		try {
-			connection = con.getConexion();
-		} catch (ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
-		}
-		String sql = "INSERT INTO InicioSesion (Usuarios, Claves) VALUES (?,?)";
-		try (PreparedStatement statement = connection.prepareStatement(sql)) {
-			statement.setString(1, uc.getUser());
-			statement.setString(2, uc.getClave());
-			statement.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-
-		}
-	}
-
-	public ArrayList<UserClave> cagarDatosBD() {
+	public ArrayList<UserData> cargarDatosBD() {
 
 		AccesoDB adb = new AccesoDB();
-		ArrayList<UserClave> ucs = new ArrayList<UserClave>();
+		ArrayList<UserData> ucs = new ArrayList<UserData>();
 
-		String sql = "SELECT Dni, Clave FROM DatosUsuario";
+
+		String sql = "SELECT * FROM Usuario";
+
 		Connection conn;
 		Statement stmt;
 		ResultSet rs = null;
@@ -78,9 +65,15 @@ public class PIPersistencia {
 			rs = stmt.executeQuery(sql);
 
 			while (rs.next()) {
-				String user = rs.getString("Dni");
-				String clave = rs.getString("Clave");
-				UserClave uc = new UserClave(user, clave);
+
+				String dni = rs.getString("Dni");
+				String nombre = rs.getString("Nombre");
+				String apellido = rs.getString("Apellido");
+				String email = rs.getString("Email");
+				String contrasenia = rs.getString("Contrasenia");
+				String telefono = rs.getString("Telefono");
+				String direccion = rs.getString("Direccion");
+				UserData uc = new UserData(dni, nombre, apellido, email, contrasenia, telefono, direccion);
 				ucs.add(uc);
 			}
 
@@ -97,11 +90,8 @@ public class PIPersistencia {
 	public ArrayList<UserData> getDatosUsuario(String dni){
 		
 		AccesoDB acceso = new AccesoDB();
-
 		
-		//SELECT NOMBRE, APELLIDOS, DNI, CIUDAD FROM DatosUsuario WHERE Nombre = usuario;
-		
-		String query = "SELECT Nombre, Apellidos, Dni, Ciudad, Clave FROM DatosUsuario WHERE Dni = " + "'" + dni + "'";
+		String query = "SELECT * FROM Usuario WHERE Dni = " + "'" + dni + "'";
 		
 		Connection con = null;
 		Statement stmt = null;
@@ -116,9 +106,10 @@ public class PIPersistencia {
 			stmt = con.createStatement();
 
 			rslt = stmt.executeQuery(query);
-			
 			if(rslt.next()) {
-				datosUsuario.add(new UserData(rslt.getString("Nombre"), rslt.getString("Apellidos"), rslt.getString("Dni"), rslt.getString("Ciudad"), rslt.getString("Clave")));
+				datosUsuario.add(new UserData(rslt.getString("Dni"), rslt.getString("Nombre"), 
+						rslt.getString("Apellido"), rslt.getString("Email"), rslt.getString("Contrasenia"),
+						rslt.getString("Telefono"), rslt.getString("Direccion")));
 			}
 			
 		} catch (Exception e) {
@@ -143,6 +134,92 @@ public class PIPersistencia {
 		}
 		
 		return datosUsuario;
+		
+	}
+	
+	public ArrayList<Reserva> getReservas(String id_pista){
+		
+		AccesoDB acceso = new AccesoDB();
+		
+		ArrayList<Reserva> listaReservas = new ArrayList<>();
+		
+		//SELECT ID_Reserva, Dni, ID_Pista, Dia, Hora FROM Reserva WHERE ID_Pista = id_pista;
+		
+		String query = "SELECT ID_Reserva, Dni, ID_Pista, Dia, Hora FROM Reserva WHERE ID_Pista = " + id_pista;
+		
+		Connection con = null;
+		Statement stmt = null;
+		ResultSet rslt = null;
+		
+		try {
+			
+			con = acceso.getConexion();
+
+			stmt = con.createStatement();
+
+			rslt = stmt.executeQuery(query);
+			
+			if(rslt.next()) {
+				listaReservas.add(new Reserva(rslt.getString("ID_Reserva"), rslt.getString("Dni"), rslt.getString("ID_Pista"), rslt.getString("Dia"), rslt.getString("Hora")));
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			
+			try {
+				
+				if (rslt != null) {
+					rslt.close();
+				}
+				if (stmt != null) {
+					stmt.close();
+				}
+				if (con != null) {
+					con.close();
+				}			
+				
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		
+		return listaReservas;
+	}
+
+	public void realizarReserva(Reserva reservaDatos) {
+
+		AccesoDB acceso = new AccesoDB();
+		
+		String query = "INSERT INTO Reserva (Dni, ID_Pista, Dia, Hora) VALUES (" + reservaDatos.getDni() + ", " + reservaDatos.getId_pista() + ", " + reservaDatos.getDia() + ", " + reservaDatos.getHora() + ")";
+
+		Connection con = null;
+		Statement stmt = null;
+
+		try {
+			con = acceso.getConexion();
+
+			stmt = con.createStatement();
+			
+			stmt.executeUpdate(query);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+
+			try {
+
+				if (stmt != null) {
+					stmt.close();
+				}
+				if (con != null) {
+					con.close();
+				}
+
+			} catch (SQLException e2) {
+				e2.printStackTrace();
+			}
+		}
 		
 	}
 

@@ -1,55 +1,189 @@
 package view;
 
-import javax.swing.JPanel;
+
+import db.PIPersistencia;
+import model.Reserva;
+
 import javax.swing.JLabel;
+
+import control.PIListener;
+
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
+
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
 
 public class PReservarPista extends JFrame{
-	private JComboBox cmbDeporte;
-	private JComboBox cmbPista;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	public static final String RETROCEDER = "Retroceder";
+	public static final String RESERVAR_PISTA = "Reservar Pista";
+	private JButton btnReservar;
+	private JButton btnRetroceder;
+	private static final int ANCHO = 800;
+	private static final int ALTO = 500;
+	private JComboBox<String> cmbPista;
+	private JComboBox<String> cmbDia;
+	private JComboBox<String> cmbHora;
+	private ArrayList<String> listaDias = new ArrayList<>(Arrays.asList("Lunes", "Martes","Miercoles", "Jueves", "Viernes"));
+	private ArrayList<String> listaHoras = new ArrayList<>(Arrays.asList("10", "11","12"));
+	private ArrayList<String> listaPistas = new ArrayList<>(Arrays.asList("Pista de Tenis", "Pista de Fútbol", "Pista de Pádel"));
+
+	private PIPersistencia piPersistencia;
+	
+	
+	private String id_pista;
 
 	
 	public PReservarPista(){
-		setLayout(null);
-		
-		JLabel lblDeporte = new JLabel("Deporte");
-		lblDeporte.setBounds(46, 54, 57, 23);
-		add(lblDeporte);
-		
-		cmbDeporte = new JComboBox();
-		cmbDeporte.setModel(new DefaultComboBoxModel(new String[] {"Selecciona un deporte", "Baloncesto", "F\u00FAtbol", "Tenis", "Padel"}));
-		cmbDeporte.setBounds(116, 54, 137, 23);
-		add(cmbDeporte);
-		
-		JLabel lblPista = new JLabel("Pista");
-		lblPista.setBounds(46, 103, 46, 14);
-		add(lblPista);
-		
-		cmbPista = new JComboBox();
-		cmbPista.setBounds(116, 99, 137, 23);
-		add(cmbPista);
-		
-		JLabel lblDia = new JLabel("Dia");
-		lblDia.setBounds(46, 144, 46, 14);
-		add(lblDia);
-		
-		JLabel lblHora = new JLabel("Hora");
-		lblHora.setBounds(46, 180, 46, 14);
-		add(lblHora);
-		
-		JComboBox cmbDia = new JComboBox();
-		cmbDia.setBounds(116, 140, 137, 23);
-		add(cmbDia);
-		
-		JComboBox cmbHora = new JComboBox();
-		cmbHora.setBounds(116, 176, 137, 23);
-		add(cmbHora);
+		piPersistencia = new PIPersistencia();
 		init();
 	}
 
 	private void init() {
+		getContentPane().setLayout(null);
+		
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		
+		setSize(ANCHO, ALTO);
+		
+		JLabel lblPista = new JLabel("Pista");
+		lblPista.setBounds(46, 103, 46, 14);
+		getContentPane().add(lblPista);
+		
+		cmbPista = new JComboBox<String>();
+		cmbPista.setModel(new DefaultComboBoxModel<String>());
+		for (String pista : listaPistas) {
+			cmbPista.addItem(pista);
+		}
+		cmbPista.setBounds(116, 99, 137, 23);
+		getContentPane().add(cmbPista);
+		
+		JLabel lblDia = new JLabel("Dia");
+		lblDia.setBounds(46, 144, 46, 14);
+		getContentPane().add(lblDia);
+		
+		JLabel lblHora = new JLabel("Hora");
+		lblHora.setBounds(46, 180, 46, 14);
+		getContentPane().add(lblHora);
+		
+		cmbDia = new JComboBox<String>();
+		cmbDia.setBounds(116, 140, 137, 23);
+		getContentPane().add(cmbDia);
+		
+		cmbHora = new JComboBox<String>();
+		cmbHora.setBounds(116, 176, 137, 23);
+		getContentPane().add(cmbHora);
+		
+		btnReservar = new JButton(RESERVAR_PISTA);
+		btnReservar.setBounds(379, 219, 196, 48);
+		getContentPane().add(btnReservar);
+		
+		btnRetroceder = new JButton(RETROCEDER);
+		btnRetroceder.setBounds(202, 325, 196, 55);
+		getContentPane().add(btnRetroceder);
+		
+		centrarVentana();
+	}
+	
+	
+	private void centrarVentana() {
+		Dimension pantalla = Toolkit.getDefaultToolkit().getScreenSize();               
+		Dimension ventana = new Dimension(ANCHO, ALTO);               
+		setLocation((pantalla.width - ventana.width) / 2,  (pantalla.height - ventana.height) / 2);
+	}
+	
+	
+	
+	public void actualizarComboBox() {
+		
+		id_pista = "0";
+		
+		if(cmbPista.getSelectedItem().equals("Pista de Tenis")) {
+			id_pista = "1";
+		} else if(cmbPista.getSelectedItem().equals("Pista de Fútbol")) {
+			id_pista = "2";
+		} else if(cmbPista.getSelectedItem().equals("Pista de Pádel")) {
+			id_pista = "3";
+		}
+		
+		//TODO pillar 
+		
+		ArrayList<Reserva> listaReservas = piPersistencia.getReservas(id_pista);
+		
+		String pista = (String) cmbPista.getSelectedItem();
+		
+		
+		//Pides la pista, compruebas a ver si hay una reserva con esa pista y si la hay quitas el dia del array de dias y luego compruebas el dia 
+		//que ha seleccionado y si es igual que el de la reserva quitas la hora que haya en la reserva de la base de datos 
+		//y lo cargas en el setModel, hay que hacer que cuando selecciones una pista te cargue el dia y cuando seleccionas el dia te cargue la hora por lo que 
+		//tendra 
+		
+		
+		for (Reserva reserva : listaReservas) {
+			
+			if(pista.equals(reserva.getId_pista())) {
+				
+				for (int i = 0; i < listaDias.size(); i++) {
+					
+					if (listaDias.get(i).equals(reserva.getDia())) {
+						
+						listaDias.remove(i);
+						
+						for (int j = 0; j < listaHoras.size(); j++) {
+							
+							if(listaHoras.get(j).equals(reserva.getHora())) {
+								listaHoras.remove(j);
+							}
+							
+						}
+					}
+				}
+				
+			}
+		}
+		
+		cmbDia.setModel(new DefaultComboBoxModel<String>((String[]) listaDias.toArray()));
+		cmbHora.setModel(new DefaultComboBoxModel<String>((String[]) listaHoras.toArray()));
+		cmbPista.setModel(new DefaultComboBoxModel<String>((String[]) listaPistas.toArray()));
+
+			
+	}
+
+	public void reservarPista() {
+		
+		String dia = (String) cmbDia.getSelectedItem();
+		String hora = (String) cmbHora.getSelectedItem();
+		
+		Reserva reservaDatos = new Reserva(null, PIListener.DNI, id_pista, dia, hora);
+		
+		piPersistencia.realizarReserva(reservaDatos);
+		vaciarComboBox();
 		
 	}
+
+	private void vaciarComboBox() {
+		cmbDia.setSelectedIndex(0);
+		cmbHora.setSelectedIndex(0);
+		cmbPista.setSelectedIndex(0);
+		
+	}
+
+	public void setActionListener(PIListener l) {
+		btnReservar.addActionListener(l);
+		btnReservar.addActionListener(l);
+		cmbPista.addActionListener(l);
+		
+	}
+	
+	
 }

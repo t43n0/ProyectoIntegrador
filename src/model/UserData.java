@@ -30,6 +30,7 @@ public class UserData {
 
 	public String getNombre() {
 		return nombre;
+
 	}
 
 
@@ -56,9 +57,4 @@ public class UserData {
 	public String getDireccion() {
 		return direccion;
 	}
-	
-	
-	
-	
-
 }

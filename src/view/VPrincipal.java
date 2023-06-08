@@ -1,17 +1,13 @@
 package view;
 
 import javax.swing.JFrame;
-import javax.swing.JScrollPane;
 import control.PIListener;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
 
 import javax.swing.JButton;
-import javax.swing.JMenuBar;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JMenu;
+
 
 public class VPrincipal extends JFrame {
 	public static final String CONSULTA_DE_RESERVAS = "Consulta de Reservas";

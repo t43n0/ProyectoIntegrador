@@ -141,8 +141,8 @@ public class VActualizarDatosUsuario extends JFrame{
 		for (UserData userData : datosUsuario) {
 			campoDni.setText(dni);
 			campoNombre.setText(userData.getNombre());
-			campoApellidos.setText(userData.getApellidos());
-			campoCiudad.setText(userData.getCiudad());
+			campoApellidos.setText(userData.getApellido());
+			campoCiudad.setText(userData.getDireccion());
 			
 		}
 	}

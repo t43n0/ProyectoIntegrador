@@ -4,7 +4,6 @@ import javax.swing.JFrame;
 import javax.swing.JTextField;
 
 import control.PIListener;
-import model.UserClave;
 import model.UserData;
 
 import java.awt.Dimension;
@@ -28,7 +27,6 @@ public class VRegistrar extends JFrame {
 	private JButton btnCancelar;
 	private JButton btnRegistrar;
 	private JTextField campoContrasenia;
-	private JTextField campoConfirmarContrasenia;
 	private JTextField campoDni;
 	private JTextField campoCiudad;
 	private JTextField campoEmail;
@@ -69,11 +67,6 @@ public class VRegistrar extends JFrame {
 		campoContrasenia.setBounds(136, 203, 143, 20);
 		getContentPane().add(campoContrasenia);
 		
-		campoConfirmarContrasenia = new JTextField();
-		campoConfirmarContrasenia.setColumns(10);
-		campoConfirmarContrasenia.setBounds(198, 291, 143, 20);
-		getContentPane().add(campoConfirmarContrasenia);
-		
 		JLabel lblUsuario = new JLabel("Nombre");
 		lblUsuario.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblUsuario.setBounds(24, 59, 85, 17);
@@ -88,11 +81,6 @@ public class VRegistrar extends JFrame {
 		lblClave.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblClave.setBounds(24, 196, 85, 30);
 		getContentPane().add(lblClave);
-		
-		JLabel lblConfirmarClave = new JLabel("Confirmar contrase\u00F1a");
-		lblConfirmarClave.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblConfirmarClave.setBounds(22, 280, 155, 37);
-		getContentPane().add(lblConfirmarClave);
 		
 		JLabel lblDni = new JLabel("DNI");
 		lblDni.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -147,22 +135,12 @@ public class VRegistrar extends JFrame {
 		v1.dispose();
 		v2.setVisible(true);
 	}
-	//TODO arreglarlo
-	public UserData getDni() {
-		if(!campoNombre.getText().isBlank()) {
-			return new UserClave(campoNombre.getText(), campoContrasenia.getText());
-		}
-		return null;
-	}
 	
 	public UserData getUserData() {
-		return new UserData(campoNombre.getText(), campoApellidos.getText(), 
-				campoDni.getText(), campoCiudad.getText());
+		return new UserData(campoDni.getText(), campoNombre.getText(), campoApellidos.getText(),
+				campoEmail.getText(), campoContrasenia.getText(), campoTelefono.getText(),
+				campoCiudad.getText());
 	}
-	
-	
-	
-	
 	
 	public boolean comprobarUsuario() {
 		return false;

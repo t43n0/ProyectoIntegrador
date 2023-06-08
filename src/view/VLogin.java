@@ -1,11 +1,10 @@
 package view;
 
 import javax.swing.JFrame;
-import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 import control.PIListener;
-import model.UserClave;
+import model.UserData;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -89,15 +88,18 @@ public class VLogin extends JFrame {
 		
 	}
 	
+	public UserData getUserData() {
+		char[] passwordChars = campoClave.getPassword();
+		String password = new String(passwordChars);
+		UserData ud = new UserData(campoDni.getText(), "", "", "", password, "", "");
+		return ud;
+	}
+	
 	public String getDniActual() {
 		
 		String dni = campoDni.getText();
 		
 		return dni; 
-	}
-	
-	public UserClave getUserClave() {
-		return new UserClave(campoDni.getText(), campoClave.getText());
 	}
 	
 	public void setActionListener(PIListener l) {
