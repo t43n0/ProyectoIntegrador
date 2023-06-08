@@ -7,6 +7,8 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 
 import javax.swing.JButton;
+import java.awt.Font;
+import java.awt.Color;
 
 
 public class VPrincipal extends JFrame {
@@ -26,7 +28,9 @@ public class VPrincipal extends JFrame {
 	private JButton btnConsulta;
 	
 	public VPrincipal() {
-		super();
+		super("Ventana principal");
+		getContentPane().setBackground(new Color(255, 128, 192));
+		getContentPane().setFont(new Font("Bahnschrift", Font.PLAIN, 10));
 		inicio();
 	}
 	
@@ -38,19 +42,23 @@ public class VPrincipal extends JFrame {
 		setSize(ANCHO, ALTO);
 		
 		btnVolver = new JButton(VOLVER);
-		btnVolver.setBounds(328, 387, 111, 21);
+		btnVolver.setFont(new Font("Bahnschrift", Font.PLAIN, 12));
+		btnVolver.setBounds(328, 406, 111, 21);
 		getContentPane().add(btnVolver);
 		
 		btnReservarPista = new JButton(RESERVAR_PISTAS);
-		btnReservarPista.setBounds(53, 52, 233, 81);
+		btnReservarPista.setFont(new Font("Bahnschrift", Font.PLAIN, 12));
+		btnReservarPista.setBounds(267, 160, 233, 81);
 		getContentPane().add(btnReservarPista);
 		
 		btnActualizarDatos = new JButton(ACTUALIZAR_DATOS_DEL_USUARIO);
-		btnActualizarDatos.setBounds(500, 64, 212, 68);
+		btnActualizarDatos.setFont(new Font("Bahnschrift", Font.PLAIN, 12));
+		btnActualizarDatos.setBounds(267, 48, 233, 81);
 		getContentPane().add(btnActualizarDatos);
 		
 		btnConsulta = new JButton(CONSULTA_DE_RESERVAS);
-		btnConsulta.setBounds(268, 239, 233, 81);
+		btnConsulta.setFont(new Font("Bahnschrift", Font.PLAIN, 12));
+		btnConsulta.setBounds(267, 279, 233, 81);
 		getContentPane().add(btnConsulta);
 		
 		centrarVentana();

@@ -26,7 +26,8 @@ public class PIListener implements ActionListener{
 	
 	public static String DNI;
 
-	public PIListener(VLogin vL, VRegistrar vR, VPrincipal vP, PReservarPista pR, VActualizarDatosUsuario vA, VConsulta vC) {
+	public PIListener(VLogin vL, VRegistrar vR, VPrincipal vP, PReservarPista pR, 
+			VActualizarDatosUsuario vA, VConsulta vC) {
 		this.vL = vL;
 		this.vR = vR;
 		this.vP = vP;

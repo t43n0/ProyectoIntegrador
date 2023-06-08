@@ -14,6 +14,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Toolkit;
 import javax.swing.JPasswordField;
+import java.awt.Color;
 
 public class VLogin extends JFrame {
 	/**
@@ -32,7 +33,8 @@ public class VLogin extends JFrame {
 	private JPasswordField campoClave;
 	
 	public VLogin() {
-		super();
+		super("Log-in");
+		getContentPane().setBackground(new Color(255, 128, 192));
 		inicio();
 	}
 	
@@ -49,18 +51,20 @@ public class VLogin extends JFrame {
 		campoDni.setColumns(10);
 		
 		btnRegistrar = new JButton(REGISTRARSE);
+		btnRegistrar.setFont(new Font("Bahnschrift", Font.PLAIN, 12));
 		btnRegistrar.setBounds(248, 102, 111, 21);
 		getContentPane().add(btnRegistrar);
 		
 		btnInicioSesion = new JButton(INISESION);
+		btnInicioSesion.setFont(new Font("Bahnschrift", Font.PLAIN, 12));
 		btnInicioSesion.setBounds(248, 38, 111, 21);
 		getContentPane().add(btnInicioSesion);
-		lblDni.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblDni.setFont(new Font("Bahnschrift", Font.PLAIN, 14));
 		lblDni.setBounds(27, 0, 126, 36);
 		getContentPane().add(lblDni);
 		
 		JLabel lblClave = new JLabel("Contrase\u00F1a");
-		lblClave.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblClave.setFont(new Font("Bahnschrift", Font.PLAIN, 14));
 		lblClave.setBounds(27, 67, 126, 36);
 		getContentPane().add(lblClave);
 		

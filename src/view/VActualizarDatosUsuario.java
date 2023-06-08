@@ -36,7 +36,7 @@ public class VActualizarDatosUsuario extends JFrame{
 	private JTextField campoEmail;
 	
 	public VActualizarDatosUsuario() {
-		super();
+		super("Actualizar datos");
 		getContentPane().setBackground(new Color(255, 128, 192));
 		piPersistencia = new PIPersistencia();
 		inicio();
@@ -71,7 +71,7 @@ public class VActualizarDatosUsuario extends JFrame{
 		
 		campoClave = new JTextField();
 		campoClave.setColumns(10);
-		campoClave.setBounds(424, 115, 143, 20);
+		campoClave.setBounds(424, 181, 143, 20);
 		getContentPane().add(campoClave);
 		
 		JLabel lblUsuario = new JLabel("Nombre");
@@ -86,7 +86,7 @@ public class VActualizarDatosUsuario extends JFrame{
 		
 		JLabel lblClave = new JLabel("Contrase\u00F1a");
 		lblClave.setFont(new Font("Bahnschrift", Font.PLAIN, 16));
-		lblClave.setBounds(424, 91, 85, 30);
+		lblClave.setBounds(424, 145, 85, 30);
 		getContentPane().add(lblClave);
 		
 		JLabel lblDni = new JLabel("DNI");
@@ -94,7 +94,7 @@ public class VActualizarDatosUsuario extends JFrame{
 		lblDni.setBounds(115, 34, 85, 17);
 		getContentPane().add(lblDni);
 		
-		JLabel lblCiudad = new JLabel("Ciudad");
+		JLabel lblCiudad = new JLabel("Direccion");
 		lblCiudad.setFont(new Font("Bahnschrift", Font.PLAIN, 16));
 		lblCiudad.setBounds(424, 34, 85, 17);
 		getContentPane().add(lblCiudad);
@@ -106,7 +106,7 @@ public class VActualizarDatosUsuario extends JFrame{
 		
 		campoCiudad = new JTextField();
 		campoCiudad.setColumns(10);
-		campoCiudad.setBounds(424, 56, 143, 20);
+		campoCiudad.setBounds(424, 61, 143, 20);
 		getContentPane().add(campoCiudad);
 		
 		campoTelefono = new JTextField();
@@ -115,7 +115,7 @@ public class VActualizarDatosUsuario extends JFrame{
 		campoTelefono.setColumns(10);
 		
 		campoEmail = new JTextField();
-		campoEmail.setBounds(424, 240, 143, 20);
+		campoEmail.setBounds(424, 115, 143, 20);
 		getContentPane().add(campoEmail);
 		campoEmail.setColumns(10);
 		
@@ -126,7 +126,7 @@ public class VActualizarDatosUsuario extends JFrame{
 		
 		JLabel lblEmail = new JLabel("Email");
 		lblEmail.setFont(new Font("Bahnschrift", Font.PLAIN, 16));
-		lblEmail.setBounds(424, 222, 85, 17);
+		lblEmail.setBounds(424, 98, 85, 17);
 		getContentPane().add(lblEmail);
 		
 		centrarVentana();

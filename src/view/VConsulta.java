@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import java.awt.Color;
 
 public class VConsulta extends JFrame {
 	public static final String ACTUALIZAR_DATOS_DEL_USUARIO = "Actualizar Datos del Usuario";
@@ -29,7 +30,8 @@ public class VConsulta extends JFrame {
 	private JTable tblTabla;
 	
 	public VConsulta() {
-		super();
+		super("Consultas");
+		getContentPane().setBackground(new Color(255, 128, 192));
 		inicio();
 	}
 	
@@ -41,12 +43,13 @@ public class VConsulta extends JFrame {
 		setSize(ANCHO, ALTO);
 		
 		btnVolver = new JButton(VOLVER_ATRAS);
+		btnVolver.setFont(new Font("Bahnschrift", Font.PLAIN, 12));
 		btnVolver.setBounds(329, 432, 111, 21);
 		getContentPane().add(btnVolver);
 		
 		JLabel lblNewLabel = new JLabel("Consultar Reservas");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		lblNewLabel.setBounds(10, 10, 231, 27);
+		lblNewLabel.setFont(new Font("Bahnschrift", Font.PLAIN, 20));
+		lblNewLabel.setBounds(271, 10, 231, 27);
 		getContentPane().add(lblNewLabel);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -55,10 +58,6 @@ public class VConsulta extends JFrame {
 		
 		tblTabla = new JTable();
 		scrollPane.setViewportView(tblTabla);
-		
-		JButton btnEliminar = new JButton("Eliminar");
-		btnEliminar.setBounds(691, 416, 85, 21);
-		getContentPane().add(btnEliminar);
 		
 		centrarVentana();
 	}

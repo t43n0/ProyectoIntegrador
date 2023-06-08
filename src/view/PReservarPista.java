@@ -15,6 +15,8 @@ import java.util.Arrays;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+import java.awt.Color;
+import java.awt.Font;
 
 public class PReservarPista extends JFrame{
 	/**
@@ -23,6 +25,8 @@ public class PReservarPista extends JFrame{
 	private static final long serialVersionUID = 1L;
 	private static final int ANCHO = 800;
 	private static final int ALTO = 500;
+	public static final String RESERVAR_PISTA = null;
+	public static final String RETROCEDER = null;
 	private JComboBox<String> cmbPista;
 	private JComboBox<String> cmbDia;
 	private JComboBox<String> cmbHora;
@@ -34,6 +38,8 @@ public class PReservarPista extends JFrame{
 
 	
 	public PReservarPista(){
+		super("Reservas");
+		getContentPane().setBackground(new Color(255, 128, 192));
 		piPersistencia = new PIPersistencia();
 		init();
 	}
@@ -46,31 +52,35 @@ public class PReservarPista extends JFrame{
 		setSize(ANCHO, ALTO);
 		
 		JLabel lblPista = new JLabel("Pista");
-		lblPista.setBounds(46, 103, 46, 14);
+		lblPista.setFont(new Font("Bahnschrift", Font.PLAIN, 16));
+		lblPista.setBounds(161, 82, 46, 23);
 		getContentPane().add(lblPista);
 		
 		cmbPista = new JComboBox<String>();
-		cmbPista.setBounds(116, 99, 137, 23);
+		cmbPista.setBounds(125, 115, 137, 23);
 		getContentPane().add(cmbPista);
 		
 		JLabel lblDia = new JLabel("Dia");
-		lblDia.setBounds(46, 144, 46, 14);
+		lblDia.setFont(new Font("Bahnschrift", Font.PLAIN, 16));
+		lblDia.setBounds(370, 82, 46, 23);
 		getContentPane().add(lblDia);
 		
 		JLabel lblHora = new JLabel("Hora");
-		lblHora.setBounds(46, 180, 46, 14);
+		lblHora.setFont(new Font("Bahnschrift", Font.PLAIN, 16));
+		lblHora.setBounds(558, 91, 46, 14);
 		getContentPane().add(lblHora);
 		
 		cmbDia = new JComboBox<String>();
-		cmbDia.setBounds(116, 140, 137, 23);
+		cmbDia.setBounds(324, 115, 137, 23);
 		getContentPane().add(cmbDia);
 		
 		cmbHora = new JComboBox<String>();
-		cmbHora.setBounds(116, 176, 137, 23);
+		cmbHora.setBounds(516, 115, 137, 23);
 		getContentPane().add(cmbHora);
 		
 		JButton btnReservar = new JButton("Reservar Pista");
-		btnReservar.setBounds(379, 219, 196, 48);
+		btnReservar.setFont(new Font("Bahnschrift", Font.PLAIN, 14));
+		btnReservar.setBounds(300, 253, 196, 48);
 		getContentPane().add(btnReservar);
 		
 		centrarVentana();
@@ -135,5 +145,10 @@ public class PReservarPista extends JFrame{
 		cmbPista.setModel(new DefaultComboBoxModel<String>((String[]) listaPistas.toArray()));
 
 			
+	}
+
+	public void reservarPista() {
+		// TODO Auto-generated method stub
+		
 	}
 }
