@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import model.Reserva;
 import model.UserData;
 
 public class PIPersistencia {
@@ -134,6 +135,85 @@ public class PIPersistencia {
 		
 		return datosUsuario;
 		
+	}
+	
+	public ArrayList<Reserva> getReservas(int id_pista){
+		
+		AccesoDB acceso = new AccesoDB();
+		
+		ArrayList<Reserva> listaReservas = new ArrayList<>();
+		
+		//SELECT ID_Reserva, Dni, ID_Pista, Dia, Hora FROM Reserva WHERE ID_Pista = id_pista;
+		
+		String query = "SELECT ID_Reserva, Dni, ID_Pista, Dia, Hora FROM Reserva WHERE ID_Pista = " + id_pista;
+		
+		Connection con = null;
+		Statement stmt = null;
+		ResultSet rslt = null;
+		
+		try {
+			
+			con = acceso.getConexion();
+
+			stmt = con.createStatement();
+
+			rslt = stmt.executeQuery(query);
+			
+			if(rslt.next()) {
+				listaReservas.add(new Reserva(rslt.getString("ID_Reserva"), rslt.getString("Dni"), rslt.getString("ID_Pista"), rslt.getString("Dia"), rslt.getString("Hora")));
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			
+			try {
+				
+				if (rslt != null) {
+					rslt.close();
+				}
+				if (stmt != null) {
+					stmt.close();
+				}
+				if (con != null) {
+					con.close();
+				}			
+				
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		
+		return listaReservas;
+	}
+
+	public void actualizarDatosUsuario(UserData usuario) {
+		AccesoDB adb = new AccesoDB();
+
+	    String sql = "UPDATE Usuario SET Dni = ?, Nombre = ?, Apellido = ?, " + 
+	    "Email = ?, Contrasenia = ?, Telefono = ?, Direccion = ? WHERE Dni = ?";
+
+	    try {
+	        Connection conn = adb.getConexion();
+	        PreparedStatement stmt = conn.prepareStatement(sql);
+	        stmt.setString(1, usuario.getDni());
+	        stmt.setString(2, usuario.getNombre());
+	        stmt.setString(3, usuario.getApellido());
+	        stmt.setString(4, usuario.getEmail());
+	        stmt.setString(5, usuario.getContrasenia());
+	        stmt.setString(6, usuario.getTelefono());
+	        stmt.setString(7, usuario.getDireccion());
+	        stmt.setString(8, usuario.getDni());
+	        
+	        
+
+	        stmt.executeUpdate();
+	        stmt.close();
+	        conn.close();
+	        
+	    } catch (ClassNotFoundException | SQLException e) {
+	        e.printStackTrace();
+	    }
 	}
 
 }

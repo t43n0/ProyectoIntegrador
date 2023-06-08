@@ -62,14 +62,21 @@ public class PIListener implements ActionListener{
 			}else if(e.getActionCommand().equals(VPrincipal.ACTUALIZAR_DATOS_DEL_USUARIO)) {
 				vP.cambiarVentana(vP, vA);
 				vA.mostrarDatosusuario();
-
+			}else if(e.getActionCommand().equals(VActualizarDatosUsuario.ACTUALIZAR)) {
+				UserData usuario = vA.cargarUsuario();
+				pip.actualizarDatosUsuario(usuario);
 			}else if(e.getActionCommand().equals(VActualizarDatosUsuario.ATRAS)) {
 				vP.cambiarVentana(vA, vP);
 			}else if(e.getActionCommand().equals(VPrincipal.CONSULTA_DE_RESERVAS)) {
 				vP.cambiarVentana(vP, vC);
 			}else if(e.getActionCommand().equals(VConsulta.VOLVER_ATRAS)) {
 				vP.cambiarVentana(vC, vP);
+			}else if(e.getActionCommand().equals(PReservarPista.RESERVAR_PISTA)) {
+				pR.reservarPista();
+			}else if(e.getActionCommand().equals(PReservarPista.RETROCEDER)){
+				vP.cambiarVentana(pR, vP);
 			}
+			
 		}
 		
 		

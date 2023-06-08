@@ -3,9 +3,10 @@ package view;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import control.PIListener;
-
+import model.Reserva;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -83,6 +84,22 @@ public class VConsulta extends JFrame {
 		modeloTabla.addColumn("Dia");
 		modeloTabla.addColumn("Hora");
 		tblTabla.setModel(modeloTabla);
+	}
+	
+	public void cargarTabla(ArrayList<Reserva> rts) {
+		modeloTabla.setRowCount(0);
+		
+		Object [] fila = new Object[5];
+		
+		for (Reserva rt : rts) {
+			fila[0] = rt.getId_reserva();
+			fila[1] = rt.getDni();
+			fila[2] = rt.getId_pista();
+			fila[3] = rt.getDia();
+			fila[4] = rt.getHora();
+			
+			modeloTabla.addRow(fila);
+		}
 	}
 	
 	private void centrarVentana() {

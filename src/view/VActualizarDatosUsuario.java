@@ -32,6 +32,8 @@ public class VActualizarDatosUsuario extends JFrame{
 	private JTextField campoCiudad;
 	
 	private PIPersistencia piPersistencia;
+	private JTextField campoTelefono;
+	private JTextField campoEmail;
 	
 	public VActualizarDatosUsuario() {
 		super();
@@ -57,7 +59,7 @@ public class VActualizarDatosUsuario extends JFrame{
 		
 		campoApellidos = new JTextField();
 		campoApellidos.setColumns(10);
-		campoApellidos.setBounds(136, 129, 143, 20);
+		campoApellidos.setBounds(136, 103, 143, 20);
 		getContentPane().add(campoApellidos);
 		
 		btnCancelar = new JButton(ATRAS);
@@ -81,7 +83,7 @@ public class VActualizarDatosUsuario extends JFrame{
 		
 		JLabel lblApellidos = new JLabel("Apellidos");
 		lblApellidos.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblApellidos.setBounds(24, 121, 102, 30);
+		lblApellidos.setBounds(24, 95, 102, 30);
 		getContentPane().add(lblApellidos);
 		
 		JLabel lblClave = new JLabel("Contrase\u00F1a");
@@ -101,7 +103,7 @@ public class VActualizarDatosUsuario extends JFrame{
 		
 		JLabel lblCiudad = new JLabel("Ciudad");
 		lblCiudad.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblCiudad.setBounds(311, 128, 85, 17);
+		lblCiudad.setBounds(311, 102, 85, 17);
 		getContentPane().add(lblCiudad);
 		
 		campoDni = new JTextField();
@@ -111,8 +113,28 @@ public class VActualizarDatosUsuario extends JFrame{
 		
 		campoCiudad = new JTextField();
 		campoCiudad.setColumns(10);
-		campoCiudad.setBounds(424, 129, 143, 20);
+		campoCiudad.setBounds(424, 103, 143, 20);
 		getContentPane().add(campoCiudad);
+		
+		JLabel lblNewLabel = new JLabel("Telefono");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNewLabel.setBounds(24, 161, 113, 20);
+		getContentPane().add(lblNewLabel);
+		
+		campoTelefono = new JTextField();
+		campoTelefono.setBounds(136, 161, 143, 20);
+		getContentPane().add(campoTelefono);
+		campoTelefono.setColumns(10);
+		
+		JLabel lblNewLabel_1 = new JLabel("Email");
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNewLabel_1.setBounds(311, 165, 45, 13);
+		getContentPane().add(lblNewLabel_1);
+		
+		campoEmail = new JTextField();
+		campoEmail.setColumns(10);
+		campoEmail.setBounds(424, 164, 143, 20);
+		getContentPane().add(campoEmail);
 		
 		centrarVentana();
 		//habilitarDatos(true);
@@ -143,6 +165,9 @@ public class VActualizarDatosUsuario extends JFrame{
 			campoNombre.setText(userData.getNombre());
 			campoApellidos.setText(userData.getApellido());
 			campoCiudad.setText(userData.getDireccion());
+			campoClave.setText(userData.getContrasenia());
+			campoTelefono.setText(userData.getTelefono());
+			campoEmail.setText(userData.getEmail());
 			
 		}
 	}
@@ -153,6 +178,10 @@ public class VActualizarDatosUsuario extends JFrame{
 		btnActualizar.addActionListener(l);
 		
 	}
-	
-	
+
+	public UserData cargarUsuario() {
+		
+		return new UserData(campoDni.getText(), campoNombre.getText(), campoApellidos.getText(),
+				campoEmail.getText(), campoClave.getText(), campoTelefono.getText(), campoCiudad.getText());
+	}
 }
