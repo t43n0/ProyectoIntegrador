@@ -117,16 +117,11 @@ public class PReservarPista extends JFrame{
 		setLocation((pantalla.width - ventana.width) / 2,  (pantalla.height - ventana.height) / 2);
 	}
 	
+	
+	
 	public void actualizarComboBox() {
 		
-		cmbDia.removeAllItems();
-		cmbHora.removeAllItems();
-		cmbPista.removeAllItems();
-		
-		listaDias = new ArrayList<>(Arrays.asList("Lunes", "Martes","Miercoles", "Jueves", "Viernes"));
-		listaHoras = new ArrayList<>(Arrays.asList("10", "11","12"));
-		listaPistas = new ArrayList<>(Arrays.asList("Pista de Tenis", "Pista de Fútbol", "Pista de Pádel"));
-		
+	
 		
 		ArrayList<Reserva> listaReservas = piPersistencia.getReservas(id_pista);
 				
@@ -173,7 +168,7 @@ public class PReservarPista extends JFrame{
 			cmbPista.addItem(pistas);
 		}
 
-			
+		cmbPista.setSelectedIndex(id_pista-1);
 	}
 
 	public void reservarPista() {
@@ -211,7 +206,4 @@ public class PReservarPista extends JFrame{
 		
 	}
 
-	public void mostrarComboBox(boolean opcion) {
-		
-	}
 }

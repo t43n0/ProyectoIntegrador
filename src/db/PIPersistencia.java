@@ -137,56 +137,7 @@ public class PIPersistencia {
 		
 	}
 
-	public ArrayList<Reserva> getReservas(int id_pista){
-
-		
-		AccesoDB acceso = new AccesoDB();
-		
-		ArrayList<Reserva> listaReservas = new ArrayList<>();
-		
-		//SELECT ID_Reserva, Dni, ID_Pista, Dia, Hora FROM Reserva WHERE ID_Pista = id_pista;
-		
-		String query = "SELECT Dni, ID_Pista, Dia, Hora FROM Reserva WHERE ID_Pista = ?";
-		
-		Connection con = null;
-		PreparedStatement stmt = null;
-		ResultSet rslt = null;
-		
-		try {
-			
-			con = acceso.getConexion();
-
-			stmt = con.prepareStatement(query);
-			stmt.setInt(1, id_pista);
-			rslt = stmt.executeQuery();
-			
-			if(rslt.next()) {
-				listaReservas.add(new Reserva(rslt.getString("Dni"), rslt.getInt("ID_Pista"), rslt.getString("Dia"), rslt.getString("Hora")));
-			}
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			
-			try {
-				
-				if (rslt != null) {
-					rslt.close();
-				}
-				if (stmt != null) {
-					stmt.close();
-				}
-				if (con != null) {
-					con.close();
-				}			
-				
-			} catch (Exception e2) {
-				e2.printStackTrace();
-			}
-		}
-		
-		return listaReservas;
-	}
+	
 
 	public void actualizarDatosUsuario(UserData usuario) {
 		AccesoDB adb = new AccesoDB();
@@ -217,39 +168,95 @@ public class PIPersistencia {
 	    }
 	}
 
-	public void realizarReserva(Reserva reservaDatos) {
+	
+	
+	
+	public ArrayList<Reserva> getReservas(int id_pista){
 
-		AccesoDB acceso = new AccesoDB();
-		
-		String query = "INSERT INTO Reserva (Dni, ID_Pista, Dia, Hora) VALUES (" + reservaDatos.getDni() + ", " + reservaDatos.getId_pista() + ", " + "'" + reservaDatos.getDia() + "'" + ", " + reservaDatos.getHora() + ")";
+        AccesoDB acceso = new AccesoDB();
 
-		System.out.println(query);
-		Connection con = null;
-		Statement stmt = null;
+        ArrayList<Reserva> listaReservas = new ArrayList<>();
 
-		try {
-			con = acceso.getConexion();
+        //SELECT ID_Reserva, Dni, ID_Pista, Dia, Hora FROM Reserva WHERE ID_Pista = id_pista;
 
-			stmt = con.createStatement();
-			
-			stmt.executeUpdate(query);
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
+        String query = "SELECT Dni, ID_Pista, Dia, Hora FROM Reserva WHERE ID_Pista = ?";
 
-			try {
+        Connection con = null;
+        PreparedStatement stmt = null;
+        ResultSet rslt = null;
 
-				if (stmt != null) {
-					stmt.close();
-				}
-				if (con != null) {
-					con.close();
-				}
+        try {
 
-			} catch (SQLException e2) {
-				e2.printStackTrace();
-			}
-		}
-	}
+            con = acceso.getConexion();
+
+            stmt = con.prepareStatement(query);
+            stmt.setInt(1, id_pista);
+            rslt = stmt.executeQuery();
+
+            if(rslt.next()) {
+                listaReservas.add(new Reserva(rslt.getString("Dni"), rslt.getInt("ID_Pista"), rslt.getString("Dia"), rslt.getString("Hora")));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+
+            try {
+
+                if (rslt != null) {
+                    rslt.close();
+                }
+                if (stmt != null) {
+                    stmt.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
+        }
+
+        return listaReservas;
+    }
+
+    public void realizarReserva(Reserva reservaDatos) {
+
+        AccesoDB acceso = new AccesoDB();
+
+        String query = "INSERT INTO Reserva (Dni, ID_Pista, Dia, Hora) VALUES (" + reservaDatos.getDni()
+        + ", " + reservaDatos.getId_pista() + ", " + "'" + reservaDatos.getDia() + "'" + ", " 
+        		+ reservaDatos.getHora() + ")";
+
+        System.out.println(query);
+        Connection con = null;
+        Statement stmt = null;
+
+        try {
+            con = acceso.getConexion();
+
+            stmt = con.createStatement();
+
+            stmt.executeUpdate(query);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+
+            try {
+
+                if (stmt != null) {
+                    stmt.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+
+            } catch (SQLException e2) {
+                e2.printStackTrace();
+            }
+        }
+    }
 }
+
