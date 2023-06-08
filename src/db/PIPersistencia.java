@@ -136,9 +136,9 @@ public class PIPersistencia {
 		return datosUsuario;
 		
 	}
-	
 
-	public ArrayList<Reserva> getReservas(String id_pista){
+	public ArrayList<Reserva> getReservas(int id_pista){
+
 		
 		AccesoDB acceso = new AccesoDB();
 		
@@ -146,22 +146,22 @@ public class PIPersistencia {
 		
 		//SELECT ID_Reserva, Dni, ID_Pista, Dia, Hora FROM Reserva WHERE ID_Pista = id_pista;
 		
-		String query = "SELECT ID_Reserva, Dni, ID_Pista, Dia, Hora FROM Reserva WHERE ID_Pista = " + id_pista;
+		String query = "SELECT Dni, ID_Pista, Dia, Hora FROM Reserva WHERE ID_Pista = ?";
 		
 		Connection con = null;
-		Statement stmt = null;
+		PreparedStatement stmt = null;
 		ResultSet rslt = null;
 		
 		try {
 			
 			con = acceso.getConexion();
 
-			stmt = con.createStatement();
-
-			rslt = stmt.executeQuery(query);
+			stmt = con.prepareStatement(query);
+			stmt.setInt(1, id_pista);
+			rslt = stmt.executeQuery();
 			
 			if(rslt.next()) {
-				listaReservas.add(new Reserva(rslt.getString("ID_Reserva"), rslt.getString("Dni"), rslt.getString("ID_Pista"), rslt.getString("Dia"), rslt.getString("Hora")));
+				listaReservas.add(new Reserva(rslt.getString("Dni"), rslt.getInt("ID_Pista"), rslt.getString("Dia"), rslt.getString("Hora")));
 			}
 			
 		} catch (Exception e) {
@@ -221,8 +221,9 @@ public class PIPersistencia {
 
 		AccesoDB acceso = new AccesoDB();
 		
-		String query = "INSERT INTO Reserva (Dni, ID_Pista, Dia, Hora) VALUES (" + reservaDatos.getDni() + ", " + reservaDatos.getId_pista() + ", " + reservaDatos.getDia() + ", " + reservaDatos.getHora() + ")";
+		String query = "INSERT INTO Reserva (Dni, ID_Pista, Dia, Hora) VALUES (" + reservaDatos.getDni() + ", " + reservaDatos.getId_pista() + ", " + "'" + reservaDatos.getDia() + "'" + ", " + reservaDatos.getHora() + ")";
 
+		System.out.println(query);
 		Connection con = null;
 		Statement stmt = null;
 

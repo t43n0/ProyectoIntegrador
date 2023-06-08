@@ -7,11 +7,9 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 
 import javax.swing.JButton;
-<<<<<<< HEAD
 import java.awt.Font;
 import java.awt.Color;
-=======
->>>>>>> 27c282583b21e796f70084a31909bfa33a83d664
+
 
 
 public class VPrincipal extends JFrame {

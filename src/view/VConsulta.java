@@ -90,14 +90,13 @@ public class VConsulta extends JFrame {
 	public void cargarTabla(ArrayList<Reserva> rts) {
 		modeloTabla.setRowCount(0);
 		
-		Object [] fila = new Object[5];
+		Object [] fila = new Object[4];
 		
 		for (Reserva rt : rts) {
-			fila[0] = rt.getId_reserva();
-			fila[1] = rt.getDni();
-			fila[2] = rt.getId_pista();
-			fila[3] = rt.getDia();
-			fila[4] = rt.getHora();
+			fila[0] = rt.getDni();
+			fila[1] = rt.getId_pista();
+			fila[2] = rt.getDia();
+			fila[3] = rt.getHora();
 			
 			modeloTabla.addRow(fila);
 		}
