@@ -72,12 +72,16 @@ public class PIListener implements ActionListener{
 				vP.cambiarVentana(vC, vP);
 			}else if(e.getActionCommand().equals(PReservarPista.RESERVAR_PISTA)) {
 				pR.reservarPista();
+				pR.actualizarComboBox();
 			}else if(e.getActionCommand().equals(PReservarPista.RETROCEDER)){
 				vP.cambiarVentana(pR, vP);
 			} 
 			
 		} else if(e.getSource() instanceof JComboBox) {
+			pR.getID_Pista();
 			pR.actualizarComboBox();
+			
+			//pR.mostrarComboBox();
 		}
 		
 		
